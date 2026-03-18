@@ -291,14 +291,13 @@ button {
 /* PASSWORD */
 function unlock() {
   let input = document.getElementById("pass").value;
-  if(input === "YOUR_DATE") {
-    document.getElementById("lock").style.display = "none";
-    document.getElementById("main").style.display = "block";
-
-    typeEffect();
-    fadeMusic();
-  } else {
-    alert("Wrong date 😝");
+  if(input === "ruhu") {
+  document.getElementById("lock").style.display = "none";
+  document.getElementById("main").style.display = "block";
+  typeEffect();
+  fadeMusic();
+} else {
+  alert("Wrong date 😝");
   }
 }
 
