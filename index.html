@@ -3,62 +3,112 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday My Sweetu ❤️</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+<title>Happy Birthday ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 body {
   margin: 0;
-  font-family: 'Playfair Display', serif;
-  background: black;
+  background: #050505;
   color: white;
-  text-align: center;
+  overflow-x: hidden;
+  font-family: 'Poppins', sans-serif;
 }
 
+/* BACKGROUND */
 .bg {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at center, #3a86ff, #000);
-  opacity: 0.25;
   z-index: -1;
+  background: radial-gradient(circle at center, #0f2027, #000);
+}
+.bg::before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(58,134,255,0.2), rgba(255,105,180,0.15), transparent 70%);
+  animation: glowMove 12s infinite alternate ease-in-out;
+}
+@keyframes glowMove {
+  from { transform: translate(-20%, -20%); }
+  to { transform: translate(20%, 20%); }
 }
 
+/* LOCK */
 #lock {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: black;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
+#pass {
+  padding:10px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.1);
+  border:none;
+  color:white;
+}
+.unlock-btn {
+  margin-top:15px;
+  padding:12px 25px;
+  border-radius:30px;
+  background:rgba(255,255,255,0.1);
+  border:none;
+  color:white;
+}
+.unlock-btn:active { transform:scale(0.95); }
+
+/* TITLE */
+#title {
+  display:none;
+  font-family:'Great Vibes';
+  font-size:2.2rem;
+  text-align:center;
+  opacity:0;
+  transition:1.5s;
 }
 
-#main {
-  display: none;
-  padding: 30px;
+/* STORY */
+#story {
+  display:none;
+  max-width:320px;
+  margin:auto;
+  font-family:'Cormorant Garamond';
+  line-height:1.8;
 }
 
-h1 {
-  font-size: 2.5rem;
+/* SECRET BUTTON */
+.secret-btn {
+  margin-top:30px;
+  padding:12px 25px;
+  border-radius:30px;
+  background:linear-gradient(45deg,#5a0f2e,#2b0000);
+  border:none;
+  color:white;
 }
 
-#slide {
-  width: 80%;
-  max-width: 260px;
-  border-radius: 15px;
-  margin-top: 20px;
+/* SECRET PAGE */
+#secretPage { display:none; text-align:center; padding:20px; }
+
+/* SONG CARD */
+.song-card {
+  margin:20px;
+  padding:15px;
+  border-radius:15px;
+  background:rgba(255,255,255,0.05);
 }
 
-button {
-  padding: 10px 20px;
-  border-radius: 20px;
-  border: none;
-  background: #3a86ff;
-  color: white;
-  margin-top: 20px;
+/* LYRICS */
+#lyrics {
+  margin-top:15px;
+  font-family:'Cormorant Garamond';
 }
 </style>
 </head>
@@ -67,61 +117,142 @@ button {
 
 <div class="bg"></div>
 
+<!-- LOCK -->
 <div id="lock">
-  <h2>Enter our special date ❤️</h2>
+  <h2>Enter your special date ❤️</h2>
   <input type="password" id="pass">
-  <button onclick="unlock()">Enter</button>
+  <button class="unlock-btn" onclick="unlock()">Unlock ❤️</button>
 </div>
 
-<div id="main">
-  <h1>Happy Birthday ❤️</h1>
-  <p id="typeText"></p>
-  <img id="slide" src="image1.jpg">
-  <br>
-  <button onclick="secret()">Don’t click 😏</button>
+<!-- MAIN -->
+<div id="main" style="display:none;">
+  <div id="title">Happy Birthday my sweet little baby 😘❤️</div>
+  <div id="story"></div>
+  <button class="secret-btn" onclick="openSecret()">Don’t click</button>
 </div>
 
-<div id="secretPage" style="display:none;">
-  <h1>You found it ❤️</h1>
-  <p>Your final message here...</p>
+<!-- SECRET -->
+<div id="secretPage">
+  <div id="layer1"></div>
+  <div id="layer2"></div>
+  <div id="layer3"></div>
 </div>
 
-<audio id="music"></audio>
+<audio id="music" loop></audio>
 
 <script>
-function unlock() {
-  let input = document.getElementById("pass").value;
+let bgMusic = document.getElementById("music");
 
-  if(input === "1704") {
-    document.getElementById("lock").style.display = "none";
-    document.getElementById("main").style.display = "block";
-    fadeMusic();
-  } else {
-    alert("Wrong date 😝");
+/* UNLOCK */
+function unlock() {
+  let val = document.getElementById("pass").value;
+
+  if(val === "1704") {
+    document.getElementById("lock").style.display="none";
+    document.getElementById("main").style.display="block";
+
+    setTimeout(()=>{
+      let t=document.getElementById("title");
+      t.style.display="block";
+      t.style.opacity=1;
+    },500);
+
+    setTimeout(startStory,2000);
+
+    startMusic();
   }
 }
 
-function fadeMusic() {
-  let music = document.getElementById("music");
+/* MUSIC */
+function startMusic(){
+  bgMusic.src="birthday.mp3";
+  bgMusic.volume=0.3;
+  bgMusic.play();
 
-  music.src = "song1.mp3";
-  music.volume = 0;
-  music.play().catch(()=>{});
-
-  let vol = 0;
-  let fade = setInterval(() => {
-    if(vol < 1) {
-      vol += 0.05;
-      music.volume = vol;
-    } else {
-      clearInterval(fade);
-    }
-  }, 200);
+  setTimeout(()=>{
+    bgMusic.src="song1.mp3";
+    bgMusic.play();
+  },12000);
 }
 
-function secret() {
-  document.getElementById("main").style.display = "none";
-  document.getElementById("secretPage").style.display = "block";
+/* STORY */
+let storyText=["Something beautiful is coming...","Just wait ❤️"];
+function startStory(){
+  let c=document.getElementById("story");
+  c.style.display="block";
+  let i=0;
+  function next(){
+    if(i<storyText.length){
+      let p=document.createElement("p");
+      p.innerText=storyText[i];
+      c.appendChild(p);
+      i++;
+      window.scrollBy(0,50);
+      setTimeout(next,1500);
+    }
+  }
+  next();
+}
+
+/* SECRET */
+function openSecret(){
+  document.getElementById("main").style.display="none";
+  document.getElementById("secretPage").style.display="block";
+
+  layer1();
+}
+
+/* LAYER 1 */
+function layer1(){
+  let l=document.getElementById("layer1");
+  l.innerHTML="<p>Happy Birthday to the most beautiful part of my life</p>";
+
+  setTimeout(()=>{
+    layer2();
+  },4000);
+}
+
+/* LAYER 2 (PLAYLIST) */
+function playTrack(src,lyricsArr){
+  bgMusic.pause();
+
+  let audio=new Audio(src);
+  audio.play();
+
+  showLyrics(lyricsArr);
+
+  audio.onended=()=>bgMusic.play();
+}
+
+function layer2(){
+  let l=document.getElementById("layer2");
+
+  l.innerHTML=`
+  <div class="song-card">
+    <p>This reminds me of your eyes</p>
+    <button onclick="playTrack('track1.mp3',['line1','line2'])">Play</button>
+  </div>
+  `;
+}
+
+/* LYRICS */
+function showLyrics(arr){
+  let box=document.getElementById("lyrics")||document.createElement("div");
+  box.id="lyrics";
+  box.innerHTML="";
+  document.body.appendChild(box);
+
+  let i=0;
+  function next(){
+    if(i<arr.length){
+      let p=document.createElement("p");
+      p.innerText=arr[i];
+      box.appendChild(p);
+      i++;
+      setTimeout(next,2000);
+    }
+  }
+  next();
 }
 </script>
 
