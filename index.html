@@ -321,12 +321,16 @@ function typeEffect() {
 /* MUSIC FADE */
 let songs = ["song1.mp3","song2.mp3","song3.mp3"];
 let current = 0;
-let music = document.getElementById("music");
 
 function fadeMusic() {
+  let music = document.getElementById("music");
+
+  if (!music) return; // safety (prevents crash)
+
   music.src = songs[current];
   music.volume = 0;
-  music.play();
+
+  music.play().catch(() => {}); // avoids autoplay error
 
   let vol = 0;
   let fade = setInterval(() => {
