@@ -275,62 +275,117 @@ button {
 
   <img id="slide" src="image1.jpg">
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday My Sweetu ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  background: black;
+  color: white;
+  text-align: center;
+}
+
+.bg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, #3a86ff, #000);
+  opacity: 0.25;
+  z-index: -1;
+}
+
+#lock {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#main {
+  display: none;
+  padding: 30px;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+#slide {
+  width: 80%;
+  max-width: 260px;
+  border-radius: 15px;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  background: #3a86ff;
+  color: white;
+  margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<!-- LOCK -->
+<div id="lock">
+  <h2>Enter our special date ❤️</h2>
+  <input type="password" id="pass">
+  <button onclick="unlock()">Enter</button>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+  <h1>Happy Birthday ❤️</h1>
+  <p id="typeText"></p>
+  <img id="slide" src="image1.jpg">
   <br>
   <button onclick="secret()">Don’t click 😏</button>
 </div>
 
 <!-- SECRET -->
-<div id="secretPage">
+<div id="secretPage" style="display:none;">
   <h1>You found it ❤️</h1>
-  <p>Your final emotional message here...</p>
+  <p>Your final message here...</p>
 </div>
 
 <audio id="music"></audio>
 
 <script>
-/* PASSWORD */
 function unlock() {
   let input = document.getElementById("pass").value;
 
   if(input === "1704") {
     document.getElementById("lock").style.display = "none";
     document.getElementById("main").style.display = "block";
-    typeEffect();
     fadeMusic();
   } else {
     alert("Wrong date 😝");
   }
 }
 
-/* TYPE EFFECT */
-let text = "Your main message goes here...";
-let i = 0;
-
-function typeEffect() {
-  let speed = 50;
-  function typing() {
-    if(i < text.length) {
-      document.getElementById("typeText").innerHTML += text.charAt(i);
-      i++;
-      setTimeout(typing, speed);
-    }
-  }
-  typing();
-}
-
-/* MUSIC FADE */
-let songs = ["song1.mp3","song2.mp3","song3.mp3"];
-let current = 0;
-
 function fadeMusic() {
   let music = document.getElementById("music");
-
-  if (!music) return; // safety (prevents crash)
-
-  music.src = songs[current];
+  music.src = "song1.mp3";
   music.volume = 0;
-
-  music.play().catch(() => {}); // avoids autoplay error
+  music.play().catch(()=>{});
 
   let vol = 0;
   let fade = setInterval(() => {
@@ -343,35 +398,10 @@ function fadeMusic() {
   }, 200);
 }
 
-/* SLIDESHOW FADE */
-let images = ["image1.jpg","image2.jpg","image3.jpg"];
-let index = 0;
-let slide = document.getElementById("slide");
-
-setInterval(() => {
-  slide.style.opacity = 0;
-  setTimeout(() => {
-    index = (index + 1) % images.length;
-    slide.src = images[index];
-    slide.style.opacity = 1;
-  }, 500);
-}, 3500);
-
-/* SECRET */
 function secret() {
   document.getElementById("main").style.display = "none";
   document.getElementById("secretPage").style.display = "block";
 }
-
-/* PARTICLES */
-setInterval(() => {
-  let p = document.createElement("div");
-  p.className = "particle";
-  p.style.left = Math.random() * 100 + "vw";
-  document.body.appendChild(p);
-
-  setTimeout(() => p.remove(), 10000);
-}, 300);
 </script>
 
 </body>
