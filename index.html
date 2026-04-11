@@ -3,42 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For You</title>
+    <title>The Obsidian Gallery</title>
     <style>
-        /* THE DREAMY ATMOSPHERE */
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: linear-gradient(-45deg, #1a0b1c, #3a1c2a, #1f0d16, #2d142c); background-size: 400% 400%; animation: gradientBG 15s ease infinite; font-family: 'Georgia', serif; color: #fff; display: flex; justify-content: center; align-items: center; text-align: center; }
+        /* THE MIDNIGHT ATMOSPHERE */
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: linear-gradient(-45deg, #050505, #120422, #0b0e1a, #161616); background-size: 400% 400%; animation: gradientBG 15s ease infinite; font-family: 'Inter', -apple-system, sans-serif; color: #e0e0e0; display: flex; justify-content: center; align-items: center; text-align: center; }
         @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         
-        /* PARTICLES */
+        /* STAR DRIFT PARTICLES */
         #particles { position: absolute; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
-        .particle { position: absolute; background: rgba(255, 182, 193, 0.4); border-radius: 50%; animation: float 10s infinite linear; }
-        @keyframes float { 0% { transform: translateY(100vh) scale(0); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(-10vh) scale(1); opacity: 0; } }
+        .particle { position: absolute; background: rgba(255, 255, 255, 0.4); border-radius: 50%; animation: float 12s infinite linear; }
+        @keyframes float { 0% { transform: translateY(110vh) scale(0); opacity: 0; } 50% { opacity: 0.6; } 100% { transform: translateY(-10vh) scale(1); opacity: 0; } }
 
         /* CINEMATIC SCENES */
         .scene { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 2s ease-in-out; z-index: 10; padding: 20px; box-sizing: border-box; }
         .active { opacity: 1; pointer-events: auto; }
 
-        /* GLASSMORPHISM UI */
-        .glass-box { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 40px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); display: flex; flex-direction: column; align-items: center; gap: 20px; }
-        .error-shake { animation: shake 0.4s; }
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
-
-        /* INPUT & BUTTONS */
-        input { background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,0.5); color: #fff; font-size: 24px; text-align: center; letter-spacing: 5px; outline: none; width: 150px; padding: 5px; font-family: monospace; }
-        button { background: rgba(255, 255, 255, 0.1); color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 12px 30px; border-radius: 30px; font-size: 16px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 2px; }
-        button:hover { background: rgba(255, 255, 255, 0.3); box-shadow: 0 0 15px rgba(255,255,255,0.5); }
+        /* OBSIDIAN GLASS UI */
+        .glass-box { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 15px; padding: 40px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8); display: flex; flex-direction: column; align-items: center; gap: 25px; }
         
-        /* THE GLOWING BUTTON */
-        .glow-btn { border: 2px solid #fff; box-shadow: 0 0 20px rgba(255,255,255,0.6); animation: breathe 3s infinite alternate; padding: 15px 40px; font-weight: bold; }
-        @keyframes breathe { 0% { box-shadow: 0 0 10px rgba(255,255,255,0.3); } 100% { box-shadow: 0 0 30px rgba(255,182,193,0.8); } }
+        /* TYPOGRAPHY */
+        input { background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 24px; text-align: center; letter-spacing: 8px; outline: none; width: 160px; padding: 10px; font-family: monospace; }
+        button { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.4); padding: 12px 35px; border-radius: 2px; font-size: 14px; cursor: pointer; transition: all 0.5s ease; text-transform: uppercase; letter-spacing: 3px; }
+        button:hover { background: #fff; color: #000; }
+        
+        .glow-btn { border: 1px solid #fff; padding: 18px 45px; letter-spacing: 5px; animation: breathe 4s infinite alternate; }
+        @keyframes breathe { 0% { opacity: 0.6; box-shadow: 0 0 10px rgba(255,255,255,0.1); } 100% { opacity: 1; box-shadow: 0 0 25px rgba(255,255,255,0.3); } }
 
-        /* IMAGES & TEXT */
-        .story-img { max-width: 90vw; max-height: 50vh; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); margin-bottom: 30px; object-fit: cover; transition: opacity 1s ease; }
-        .square-img { width: 90vw; max-width: 400px; height: 90vw; max-height: 400px; border-radius: 10px; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.8); margin-bottom: 20px; }
-        .caption { font-size: 18px; line-height: 1.6; max-width: 80%; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); font-style: italic; }
-        .main-message { font-size: 22px; line-height: 1.8; text-shadow: 2px 2px 10px rgba(0,0,0,0.9); }
+        .story-img { max-width: 85vw; max-height: 45vh; border-radius: 4px; filter: grayscale(20%); margin-bottom: 30px; object-fit: cover; }
+        .square-img { width: 85vw; max-width: 380px; height: 85vw; max-height: 380px; border-radius: 2px; object-fit: cover; filter: brightness(90%); margin-bottom: 25px; }
+        .caption { font-size: 16px; letter-spacing: 1px; color: #aaa; font-weight: 300; }
+        .main-message { font-size: 20px; font-weight: 300; letter-spacing: 2px; line-height: 1.6; }
 
-        /* GHOST CONTROLS */
         .ghost-right { position: absolute; right: 0; top: 0; width: 50%; height: 100%; z-index: 20; cursor: pointer; }
     </style>
 </head>
@@ -56,179 +51,133 @@
     <audio id="track5" src="ehsaas.mp3" loop></audio>
 
     <div id="scene-lock" class="scene active">
-        <div class="glass-box" id="lock-box">
-            <p class="caption">Enter your special date.</p>
-            <input type="password" id="passcode" maxlength="4" placeholder="----">
-            <button onclick="checkPasscode()">Unlock Now</button>
+        <div class="glass-box">
+            <p class="caption">ACCESS CODE REQUIRED</p>
+            <input type="password" id="passcode" maxlength="4">
+            <button onclick="checkPasscode()">Unlock</button>
         </div>
     </div>
 
     <div id="scene-birthday" class="scene">
-        <h1 class="main-message">Happy birthday my sweet little baby.</h1>
+        <h1 class="main-message" style="font-size: 28px;">Happy Birthday.</h1>
     </div>
 
     <div id="scene-novel" class="scene">
-        <img id="novel-img" class="story-img" src="" alt="Story">
+        <img id="novel-img" class="story-img" src="">
         <p id="novel-text" class="main-message"></p>
         <div class="ghost-right" onclick="nextNovel()"></div>
     </div>
 
     <div id="scene-button" class="scene">
-        <button class="glow-btn" onclick="enterVault()">DON'T CLICK</button>
+        <button class="glow-btn" onclick="enterVault()">ENTER VAULT</button>
     </div>
 
     <div id="scene-layer1" class="scene">
-        <img id="layer1-img" class="square-img" src="" alt="Her">
+        <img id="layer1-img" class="square-img" src="">
         <p id="layer1-text" class="caption"></p>
         <div class="ghost-right" onclick="nextLayer1()"></div>
     </div>
 
     <div id="scene-layer2" class="scene">
-        <img id="layer2-img" class="square-img" src="" alt="Music Cover">
+        <img id="layer2-img" class="square-img" src="">
         <p id="layer2-text" class="caption"></p>
         <div class="ghost-right" onclick="nextLayer2()"></div>
     </div>
 
-    <div id="scene-finale" class="scene" style="background: black;">
-        <p class="main-message">I don't ever want to lose you.<br><br>Happy Birthday.</p>
+    <div id="scene-finale" class="scene" style="background: #000;">
+        <p class="main-message">To another year of growth.<br><br>Take care.</p>
     </div>
 
     <script>
-        // --- MASTER DATA ARRAYS (YOUR LOCKED SCRIPTS) ---
-        
         const novelData = [
-            { img: "story1.png", text: "It started with a simple 'Hello'—two strangers in a world full of noise, not knowing that a random notification was about to change the entire rhythm of my life." },
-            { img: "story2.png", text: "Before I knew it, you weren't just a person I talked to; you became my best friend. The one who knew my silence as well as my words." },
-            { img: "story3.png", text: "But somewhere along the way, the 'friendship' started feeling like something much deeper. Every 'Good Morning' felt like a prayer, and every 'Goodnight' felt like a promise." },
-            { img: "story4.png", text: "I was scared to lose what we had, but I was more scared of never telling you the truth: that my heart had already chosen you long before my mind caught up." },
-            { img: "story5.png", text: "From strangers to best friends, and now to this—a love that feels so natural, so soft, and so right that I can't even remember what my world looked like before you." },
-            { img: "story6.png", text: "This isn't just a story; it's our history. And now, I want to show you exactly how much you mean to me. Are you ready to see what’s inside?" }
+            { img: "story1.png", text: "Some connections don't need a reason. They just exist, like stars in a quiet sky." },
+            { img: "story2.png", text: "We’ve shared miles of words and hours of silence. Each one a thread in a story only we know." },
+            { img: "story3.png", text: "Time has a way of blurring the lines, turning strangers into a constant presence." },
+            { img: "story4.png", text: "I’ve always appreciated the depth you carry—the parts of you the world doesn't always see." },
+            { img: "story5.png", text: "A birthday isn't just a date; it's a reminder of the energy you bring into the room." },
+            { img: "story6.png", text: "I built this space to capture a fragment of that energy. Step inside whenever you're ready." }
         ];
 
         const layer1Data = [
-            { img: "photo1.png", text: "Everything about you feels timeless." },
-            { img: "photo2.png", text: "In your smile, I see my world." },
-            { img: "photo3.png", text: "You turn the simplest moments into magic." },
-            { img: "photo4.png", text: "Just being near you brings total calm." },
-            { img: "photo5.png", text: "Looking at you, I see my future." }
+            { img: "photo1.png", text: "Timeless." },
+            { img: "photo2.png", text: "Perspective." },
+            { img: "photo3.png", text: "Moments." },
+            { img: "photo4.png", text: "Serenity." },
+            { img: "photo5.png", text: "Presence." }
         ];
 
         const layer2Data = [
-            { img: "cover1.png", text: "Everything about you… feels a little different.", audio: "track1" },
-            { img: "cover2.png", text: "Because to me… you are my entire world.", audio: "track2" },
-            { img: "cover3.png", text: "With you… everything feels calm.", audio: "track3" },
-            { img: "cover4.png", text: "You’re the only depth I want to explore.", audio: "track4" },
-            { img: "cover5.png", text: "I don’t ever want to lose you.", audio: "track5" }
+            { img: "cover1.png", text: "The Sound of Arz Kiya Hai.", audio: "track1" },
+            { img: "cover2.png", text: "The Sound of Jo Tum Mere Ho.", audio: "track2" },
+            { img: "cover3.png", text: "The Sound of Saibo.", audio: "track3" },
+            { img: "cover4.png", text: "The Sound of Mishri.", audio: "track4" },
+            { img: "cover5.png", text: "The Sound of Ehsaas.", audio: "track5" }
         ];
 
-        // --- STATE VARIABLES ---
-        let novelIndex = 0;
-        let layer1Index = 0;
-        let layer2Index = 0;
-        let currentAudio = null;
-
-        // --- ENGINE LOGIC ---
+        let novelIndex = 0; let layer1Index = 0; let layer2Index = 0; let currentAudio = null;
 
         function switchScene(oldScene, newScene) {
             document.getElementById(oldScene).classList.remove('active');
-            setTimeout(() => {
-                document.getElementById(newScene).classList.add('active');
-            }, 2000); // 2-second cinematic dissolve
+            setTimeout(() => { document.getElementById(newScene).classList.add('active'); }, 2000);
         }
 
         function crossfadeAudio(oldId, newId) {
             let oldTrack = document.getElementById(oldId);
             let newTrack = document.getElementById(newId);
-            
             if(newTrack) {
-                newTrack.volume = 0;
-                newTrack.play();
+                newTrack.volume = 0; newTrack.play();
                 let fadeId = setInterval(() => {
                     if (newTrack.volume < 0.9) newTrack.volume += 0.1;
                     if (oldTrack && oldTrack.volume > 0.1) oldTrack.volume -= 0.1;
-                    else {
-                        clearInterval(fadeId);
-                        if(oldTrack) oldTrack.pause();
-                        newTrack.volume = 1;
-                    }
+                    else { clearInterval(fadeId); if(oldTrack) oldTrack.pause(); newTrack.volume = 1; }
                 }, 200);
             } else if (oldTrack) {
-                // Just fade out
                 let fadeId = setInterval(() => {
                     if (oldTrack.volume > 0.1) oldTrack.volume -= 0.1;
                     else { clearInterval(fadeId); oldTrack.pause(); }
-                }, 400); // 4 second fade down
+                }, 400);
             }
         }
 
-        // --- SCENE CONTROLLERS ---
-
         function checkPasscode() {
-            let input = document.getElementById('passcode').value;
-            let box = document.getElementById('lock-box');
-            
-            if (input === "1704") {
-                box.style.boxShadow = "0 0 40px rgba(255,255,255,0.8)";
+            if (document.getElementById('passcode').value === "1704") {
                 switchScene('scene-lock', 'scene-birthday');
                 document.getElementById('bgm-birthday').play();
-                
-                // Read Birthday msg for 5 seconds, then move to Novel
                 setTimeout(() => {
                     document.getElementById('novel-img').src = novelData[0].img;
                     document.getElementById('novel-text').innerText = novelData[0].text;
                     switchScene('scene-birthday', 'scene-novel');
                     crossfadeAudio('bgm-birthday', 'bgm-lovestory');
-                }, 5000);
-            } else {
-                box.classList.add('error-shake');
-                setTimeout(() => box.classList.remove('error-shake'), 400);
-                document.getElementById('passcode').value = "";
+                }, 4000);
             }
         }
 
         function nextNovel() {
             novelIndex++;
             if (novelIndex < novelData.length) {
-                // Soft fade transition for novel
-                let img = document.getElementById('novel-img');
-                let txt = document.getElementById('novel-text');
+                let img = document.getElementById('novel-img'); let txt = document.getElementById('novel-text');
                 img.style.opacity = 0; txt.style.opacity = 0;
-                setTimeout(() => {
-                    img.src = novelData[novelIndex].img;
-                    txt.innerText = novelData[novelIndex].text;
-                    img.style.opacity = 1; txt.style.opacity = 1;
-                }, 1000);
-            } else {
-                switchScene('scene-novel', 'scene-button');
-                crossfadeAudio('bgm-lovestory', null); // Fade out love story
-            }
+                setTimeout(() => { img.src = novelData[novelIndex].img; txt.innerText = novelData[novelIndex].text; img.style.opacity = 1; txt.style.opacity = 1; }, 1000);
+            } else { switchScene('scene-novel', 'scene-button'); crossfadeAudio('bgm-lovestory', null); }
         }
 
         function enterVault() {
             document.getElementById('layer1-img').src = layer1Data[0].img;
             document.getElementById('layer1-text').innerText = layer1Data[0].text;
             switchScene('scene-button', 'scene-layer1');
-            document.getElementById('bgm-perfect').volume = 0;
-            document.getElementById('bgm-perfect').play();
             crossfadeAudio(null, 'bgm-perfect');
         }
 
         function nextLayer1() {
             layer1Index++;
             if (layer1Index < layer1Data.length) {
-                let img = document.getElementById('layer1-img');
-                let txt = document.getElementById('layer1-text');
+                let img = document.getElementById('layer1-img'); let txt = document.getElementById('layer1-text');
                 img.style.opacity = 0; txt.style.opacity = 0;
-                setTimeout(() => {
-                    img.src = layer1Data[layer1Index].img;
-                    txt.innerText = layer1Data[layer1Index].text;
-                    img.style.opacity = 1; txt.style.opacity = 1;
-                }, 1000);
+                setTimeout(() => { img.src = layer1Data[layer1Index].img; txt.innerText = layer1Data[layer1Index].text; img.style.opacity = 1; txt.style.opacity = 1; }, 1000);
             } else {
-                // Enter Layer 2
+                currentAudio = layer2Data[0].audio;
                 document.getElementById('layer2-img').src = layer2Data[0].img;
                 document.getElementById('layer2-text').innerText = layer2Data[0].text;
-                currentAudio = layer2Data[0].audio;
                 switchScene('scene-layer1', 'scene-layer2');
                 crossfadeAudio('bgm-perfect', currentAudio);
             }
@@ -237,43 +186,26 @@
         function nextLayer2() {
             layer2Index++;
             if (layer2Index < layer2Data.length) {
-                let img = document.getElementById('layer2-img');
-                let txt = document.getElementById('layer2-text');
-                let oldAudio = currentAudio;
-                currentAudio = layer2Data[layer2Index].audio;
-                
+                let img = document.getElementById('layer2-img'); let txt = document.getElementById('layer2-text');
+                let oldAudio = currentAudio; currentAudio = layer2Data[layer2Index].audio;
                 img.style.opacity = 0; txt.style.opacity = 0;
-                setTimeout(() => {
-                    img.src = layer2Data[layer2Index].img;
-                    txt.innerText = layer2Data[layer2Index].text;
-                    img.style.opacity = 1; txt.style.opacity = 1;
-                }, 1000);
-                
+                setTimeout(() => { img.src = layer2Data[layer2Index].img; txt.innerText = layer2Data[layer2Index].text; img.style.opacity = 1; txt.style.opacity = 1; }, 1000);
                 crossfadeAudio(oldAudio, currentAudio);
-            } else {
-                // The 4-Second Fade to Finale
-                document.getElementById('scene-layer2').style.transition = "opacity 4s ease-in-out";
-                switchScene('scene-layer2', 'scene-finale');
-                crossfadeAudio(currentAudio, null); // 4 sec fade out of music
-            }
+            } else { switchScene('scene-layer2', 'scene-finale'); crossfadeAudio(currentAudio, null); }
         }
 
-        // --- PARTICLE GENERATOR ---
         function createParticles() {
             const container = document.getElementById('particles');
-            for (let i = 0; i < 50; i++) {
-                let p = document.createElement('div');
-                p.classList.add('particle');
+            for (let i = 0; i < 40; i++) {
+                let p = document.createElement('div'); p.classList.add('particle');
                 p.style.left = Math.random() * 100 + 'vw';
-                p.style.width = Math.random() * 8 + 2 + 'px';
-                p.style.height = p.style.width;
+                p.style.width = Math.random() * 3 + 1 + 'px'; p.style.height = p.style.width;
                 p.style.animationDuration = Math.random() * 10 + 10 + 's';
-                p.style.animationDelay = Math.random() * 10 + 's';
+                p.style.animationDelay = Math.random() * 5 + 's';
                 container.appendChild(p);
             }
         }
         createParticles();
     </script>
 </body>
-  </html>
-  
+</html>
