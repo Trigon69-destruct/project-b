@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
+        /* 1. Alive & Aesthetic Background (Retained - It works best) */
         body, html { 
             margin: 0; padding: 0; height: 100%; overflow: hidden; 
             background: radial-gradient(circle at 15% 50%, rgba(30, 8, 50, 0.8), transparent 60%),
@@ -25,9 +26,11 @@
         @keyframes floatUp { 0% { transform: translateY(110vh) scale(0); opacity: 0; } 20% { opacity: 0.8; } 80% { opacity: 0.8; } 100% { transform: translateY(-10vh) scale(1.2); opacity: 0; } }
         @keyframes twinkle { 0% { opacity: 0.3; } 100% { opacity: 1; } }
 
+        /* 2. Scene Management */
         .scene { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 1.5s ease-in-out; z-index: 10; padding: 20px; box-sizing: border-box; }
         .active { opacity: 1; pointer-events: auto; }
 
+        /* 3. Neon Glass Buttons (Retained - they feel premium) */
         .glass-box { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 15px; padding: 40px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8); }
         button { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); color: #fff; border: 2px solid #00f2fe; padding: 18px 50px; border-radius: 50px; font-size: 16px; cursor: pointer; transition: all 0.4s ease-in-out; letter-spacing: 1px; box-shadow: 0 0 10px rgba(0, 242, 254, 0.3), inset 0 0 5px rgba(0, 242, 254, 0.1); position: relative; z-index: 30; }
         button:hover { background: rgba(255, 255, 255, 0.08); border-color: #fff; box-shadow: 0 0 25px rgba(0, 242, 254, 0.7), inset 0 0 10px rgba(0, 242, 254, 0.3); transform: translateY(-2px); }
@@ -38,36 +41,34 @@
         #scene-button button:hover { border-color: #fff !important; box-shadow: 0 0 25px rgba(170, 0, 255, 0.7), inset 0 0 10px rgba(170, 0, 255, 0.3); }
         @keyframes breatheGlowPurple { 0% { box-shadow: 0 0 10px rgba(170, 0, 255, 0.3); border-color: #a0f; } 100% { box-shadow: 0 0 20px rgba(170, 0, 255, 0.6); border-color: #fff; } }
 
-        /* IMAGE MELT EFFECT */
-        .story-img { max-width: 90vw; max-height: 40vh; border-radius: 8px; margin-bottom: 30px; object-fit: cover; box-shadow: 0 0 50px 15px #000, 0 10px 30px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.03); }
-        .square-img { width: 85vw; max-width: 380px; height: 85vw; max-height: 380px; border-radius: 4px; object-fit: cover; margin-bottom: 25px; box-shadow: 0 0 50px 15px #000, 0 10px 30px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.03); }
+        /* 4. AESTHETIC STATIC IMAGE NEON GLOW */
+        /* Replaces melting shadows with brilliant, solid neon borders that won't fail */
+        .story-img { max-width: 90vw; max-height: 40vh; border-radius: 8px; margin-bottom: 25px; object-fit: cover; border: 2px solid rgba(255, 255, 255, 0.15); box-shadow: 0 0 15px rgba(0, 242, 254, 0.2), 0 10px 40px rgba(0,0,0,0.8); }
+        .square-img { width: 85vw; max-width: 380px; height: 85vw; max-height: 380px; border-radius: 4px; object-fit: cover; margin-bottom: 25px; border: 2px solid rgba(255, 255, 255, 0.15); box-shadow: 0 0 15px rgba(170, 0, 255, 0.2), 0 10px 40px rgba(0,0,0,0.8); }
         
-        /* NEON BORDERS FOR PLAYLIST COVERS */
-        #scene-layer2 .square-img { animation: breatheNeonImage 3s infinite alternate; border: 2px solid transparent; }
-        @keyframes breatheNeonImage { 0% { border-color: rgba(0, 242, 254, 0.5); box-shadow: 0 0 20px rgba(0, 242, 254, 0.3), 0 0 50px 15px #000; } 100% { border-color: rgba(170, 0, 255, 0.5); box-shadow: 0 0 30px rgba(170, 0, 255, 0.5), 0 0 50px 15px #000; } }
+        /* Playlist specific static glow */
+        #scene-layer2 .square-img { border-color: rgba(255, 255, 255, 0.2); box-shadow: 0 0 30px 10px rgba(0, 242, 254, 0.15), 0 0 60px 10px rgba(170, 0, 255, 0.15), 0 10px 40px rgba(0,0,0,0.8); }
 
-        /* TYPOGRAPHY */
-        .main-message { font-family: 'Playfair Display', serif; font-size: 22px; font-style: italic; font-weight: 400; letter-spacing: 1px; line-height: 1.6; color: #f5f5f5; text-shadow: 0 2px 10px rgba(0,0,0,0.8); max-width: 85vw; }
+        /* 5. TYPOGRAPHY (KILLING THE ROBOT TEXT) */
+        /* All captions and descriptions are now unified in the elegant, dreamy Playfair style */
+        .main-message { font-family: 'Playfair Display', serif; font-size: 21px; font-style: italic; font-weight: 400; letter-spacing: 0.5px; line-height: 1.6; color: #fdfdfd; text-shadow: 0 2px 10px rgba(0,0,0,0.8); max-width: 85vw; }
         
-        /* THE CARVED GOLD BIRTHDAY TEXT (MOBILE OPTIMIZED) */
+        /* Gold Carved Birthday Text - We keep this, it works. */
         .birthday-text { 
-            font-family: 'Playfair Display', serif; 
-            font-size: 34px; 
-            font-weight: 700; 
-            line-height: 1.4; 
-            color: #d4af37; /* True Metallic Gold */
-            text-shadow: 
-                -1px -1px 0px rgba(255,255,255,0.2), 
-                2px 2px 4px rgba(0,0,0,0.9), 
-                0px 0px 20px rgba(212, 175, 55, 0.4); 
+            font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 700; line-height: 1.4; 
+            color: #d4af37; text-shadow: -1px -1px 0px rgba(255,255,255,0.2), 2px 2px 4px rgba(0,0,0,0.9), 0px 0px 20px rgba(212, 175, 55, 0.4); 
         }
 
-        .caption { font-size: 14px; color: #d0d0d0; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 300; line-height: 1.8; white-space: pre-line; max-width: 80vw; }
-        .caption-title { font-weight: 600; color: #fff; }
+        /* Aesthetics Caption - Dreamy descriptions *under* the image, NO OVERLAP */
+        .aes-caption { 
+            font-family: 'Playfair Display', serif; font-size: 20px; font-style: italic; color: #fff; line-height: 1.6; 
+            margin-top: 10px; max-width: 85vw; text-shadow: 0 2px 8px rgba(0,0,0,0.8); white-space: pre-line; 
+        }
+        .caption-title { font-style: normal; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: 15px; color: #aaa; margin-bottom: 5px; display: block; font-family: 'Inter', sans-serif;}
 
-        /* THE NAVIGATION */
-        .tap-indicator { position: absolute; bottom: 6vh; left: 50%; transform: translateX(-50%); font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,0.4); text-transform: uppercase; animation: pulseText 2s infinite; pointer-events: none; width: 100%; opacity: 0.5;}
-        @keyframes pulseText { 0% { opacity: 0.2; } 50% { opacity: 0.8; } 100% { opacity: 0.2; } }
+        /* Navigation indicator */
+        .tap-indicator { position: absolute; bottom: 5vh; left: 50%; transform: translateX(-50%); font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,0.3); text-transform: uppercase; animation: pulseText 2s infinite; pointer-events: none; width: 100%;}
+        @keyframes pulseText { 0% { opacity: 0.2; } 50% { opacity: 0.6; } 100% { opacity: 0.2; } }
 
         .ghost-left { position: absolute; left: 0; top: 0; width: 50%; height: 100%; z-index: 20; cursor: pointer; }
         .ghost-right { position: absolute; right: 0; top: 0; width: 50%; height: 100%; z-index: 20; cursor: pointer; }
@@ -76,17 +77,17 @@
 <body>
     <div id="particles"></div>
 
-    <audio id="bgm-birthday" src="birthday_instrumental.mp3" loop></audio>
-    <audio id="bgm-lovestory" src="lovestory_instrumental.mp3" loop></audio>
-    <audio id="track1" src="arz_kiya_hai.mp3" loop></audio>
-    <audio id="track2" src="jo_tum_mere_ho.mp3" loop></audio>
-    <audio id="track3" src="saibo.mp3" loop></audio>
-    <audio id="track4" src="mishri.mp3" loop></audio>
-    <audio id="track5" src="ehsaas.mp3" loop></audio>
+    <audio id="bgm-birthday" src="birthday_instrumental.mp3" loop pre-load="auto"></audio>
+    <audio id="bgm-lovestory" src="lovestory_instrumental.mp3" loop pre-load="none"></audio>
+    <audio id="track1" src="arz_kiya_hai.mp3" loop pre-load="none"></audio>
+    <audio id="track2" src="jo_tum_mere_ho.mp3" loop pre-load="none"></audio>
+    <audio id="track3" src="saibo.mp3" loop pre-load="none"></audio>
+    <audio id="track4" src="mishri.mp3" loop pre-load="none"></audio>
+    <audio id="track5" src="ehsaas.mp3" loop pre-load="none"></audio>
 
     <div id="scene-start" class="scene active">
         <div class="glass-box">
-            <p class="caption" style="margin-bottom:20px; font-weight:600; color:#fff;">PROJECT B // THE OBSIDIAN ARCHIVE</p>
+            <p class="main-message" style="margin-bottom:25px; font-weight:700; text-transform:uppercase; letter-spacing:3px; font-size:16px; font-style:normal; font-family:'Inter', sans-serif; color:#aaa;">Project B // The Obsidian Gallery</p>
             <button onclick="startExperience()" class="neon-glow">Begin Experience</button>
         </div>
     </div>
@@ -109,7 +110,7 @@
 
     <div id="scene-layer1" class="scene">
         <img id="layer1-img" class="square-img" src="">
-        <p id="layer1-text" class="caption"></p>
+        <p id="layer1-text" class="aes-caption"></p>
         <div class="tap-indicator">&lsaquo; TAP LEFT TO GO BACK &nbsp;&nbsp;|&nbsp;&nbsp; TAP RIGHT TO CONTINUE &rsaquo;</div>
         <div class="ghost-left" onclick="prevLayer1()"></div>
         <div class="ghost-right" onclick="nextLayer1()"></div>
@@ -117,7 +118,7 @@
 
     <div id="scene-layer2" class="scene">
         <img id="layer2-img" class="square-img" src="">
-        <p id="layer2-text" class="caption"></p>
+        <p id="layer2-text" class="aes-caption"></p>
         <div class="tap-indicator">&lsaquo; PREVIOUS TRACK &nbsp;&nbsp;|&nbsp;&nbsp; NEXT TRACK &rsaquo;</div>
         <div class="ghost-left" onclick="prevLayer2()"></div>
         <div class="ghost-right" onclick="nextLayer2()"></div>
@@ -138,22 +139,26 @@
         ];
 
         const layer1Data = [
-            { img: "photo1.png", text: "<span class='caption-title'>Timeless.</span>\nThere's a quiet elegance in how you carry yourself." }, 
-            { img: "photo2.png", text: "<span class='caption-title'>Perspective.</span>\nYou've always had a unique way of looking at the world." },
-            { img: "photo3.png", text: "<span class='caption-title'>Moments.</span>\nCapturing the simple things that most people overlook." }, 
-            { img: "photo4.png", text: "<span class='caption-title'>Serenity.</span>\nA reminder that peace looks incredibly good on you." },
-            { img: "photo5.png", text: "<span class='caption-title'>Presence.</span>\nSome people just brighten the room without trying." }
+            { img: "photo1.png", text: "<span class='caption-title'>Timeless.</span>There's a quiet elegance in how you carry yourself." }, 
+            { img: "photo2.png", text: "<span class='caption-title'>Perspective.</span>You've always had a unique way of looking at the world." },
+            { img: "photo3.png", text: "<span class='caption-title'>Moments.</span>Capturing the simple things that most people overlook." }, 
+            { img: "photo4.png", text: "<span class='caption-title'>Serenity.</span>A reminder that peace looks incredibly good on you." },
+            { img: "photo5.png", text: "<span class='caption-title'>Presence.</span>Some people just brighten the room without trying." }
         ];
 
         const layer2Data = [
-            { img: "cover1.png", text: "<span class='caption-title'>Track 01 // Arz Kiya Hai</span>\nFor the quiet moments and the unsaid words.", audio: "track1" },
-            { img: "cover2.png", text: "<span class='caption-title'>Track 02 // Jo Tum Mere Ho</span>\nBecause some melodies just feel like home.", audio: "track2" },
-            { img: "cover3.png", text: "<span class='caption-title'>Track 03 // Saibo</span>\nDistance is just a concept when the energy matches.", audio: "track3" },
-            { img: "cover4.png", text: "<span class='caption-title'>Track 04 // Mishri</span>\nSweet, subtle, and beautifully uncomplicated.", audio: "track4" },
-            { img: "cover5.png", text: "<span class='caption-title'>Track 05 // Ehsaas</span>\nA reflection of depth. An absolute classic.", audio: "track5" }
+            { img: "cover1.png", text: "<span class='caption-title'>Track 01</span>Arz Kiya Hai.\nA melody for quiet moments and unsaid words.", audio: "track1" },
+            { img: "cover2.png", text: "<span class='caption-title'>Track 02</span>Jo Tum Mere Ho.\nBecause some sounds just feel like home.", audio: "track2" },
+            { img: "cover3.png", text: "<span class='caption-title'>Track 03</span>Saibo.\nDistance is just a concept when the energy matches.", audio: "track3" },
+            { img: "cover4.png", text: "<span class='caption-title'>Track 04</span>Mishri.\nSweet, subtle, and beautifully uncomplicated.", audio: "track4" },
+            { img: "cover5.png", text: "<span class='caption-title'>Track 05</span>Ehsaas.\nA reflection of depth. An absolute classic.", audio: "track5" }
         ];
 
         let novelIndex = 0; let layer1Index = 0; let layer2Index = 0; let currentAudio = 'bgm-lovestory';
+
+        // Pre-load audio for the first novel scene and birthday
+        document.getElementById('bgm-birthday').load();
+        document.getElementById('bgm-lovestory').load();
 
         function switchScene(old, next) {
             document.getElementById(old).classList.remove('active');
@@ -173,7 +178,7 @@
                             if (newTrack.volume < 0.9) { newTrack.volume = Math.min(1, newTrack.volume + 0.1); } 
                             else { clearInterval(fadeIn); newTrack.volume = 1; }
                         }, 100);
-                    }).catch(error => console.log("Playback blocked"));
+                    }).catch(e=>{});
                 }
             } 
             
@@ -186,17 +191,6 @@
         }
 
         function startExperience() {
-            // MOBILE AUDIO UNLOCK HACK: Briefly play and pause all audio to bypass restrictions
-            let allAudios = ['bgm-birthday', 'bgm-lovestory', 'track1', 'track2', 'track3', 'track4', 'track5'];
-            allAudios.forEach(id => {
-                let el = document.getElementById(id);
-                if(el) {
-                    el.volume = 0;
-                    let p = el.play();
-                    if(p !== undefined) { p.then(() => { if(id !== 'bgm-birthday') el.pause(); }).catch(e=>{}); }
-                }
-            });
-
             switchScene('scene-start', 'scene-birthday');
             let mainAudio = document.getElementById('bgm-birthday');
             mainAudio.volume = 1;
@@ -218,20 +212,19 @@
             let txt = document.getElementById(prefix + '-text');
             img.style.opacity = 0; txt.style.opacity = 0;
             
-            // Pre-load the single next image right before fading it in
-            let tempImg = new Image();
-            tempImg.src = dataArray[index].img;
-            
-            setTimeout(() => { 
-                img.src = dataArray[index].img; 
-                txt.innerHTML = dataArray[index].text; 
-                img.style.opacity = 1; txt.style.opacity = 1; 
-            }, 800);
+            // Load this specific next image
+            img.src = dataArray[index].img; 
+            txt.innerHTML = dataArray[index].text; 
+
+            setTimeout(() => { img.style.opacity = 1; txt.style.opacity = 1; }, 800);
         }
 
         function nextNovel() {
             if (novelIndex < novelData.length - 1) {
-                novelIndex++; updateSceneContent('novel', novelData, novelIndex);
+                novelIndex++; 
+                updateSceneContent('novel', novelData, novelIndex);
+                // Pre-load the next image if possible
+                if (novelIndex < novelData.length - 1) { const nxt = new Image(); nxt.src = novelData[novelIndex+1].img; }
             } else { switchScene('scene-novel', 'scene-button'); }
         }
         function prevNovel() {
@@ -242,18 +235,30 @@
             document.getElementById('layer1-img').src = layer1Data[0].img;
             document.getElementById('layer1-text').innerHTML = layer1Data[0].text;
             switchScene('scene-button', 'scene-layer1');
+            
+            // Pre-load the second photo
+            const nxt = new Image(); nxt.src = layer1Data[1].img;
         }
 
         function nextLayer1() {
             if (layer1Index < layer1Data.length - 1) {
-                layer1Index++; updateSceneContent('layer1', layer1Data, layer1Index);
+                layer1Index++; 
+                updateSceneContent('layer1', layer1Data, layer1Index);
+                if (layer1Index < layer1Data.length - 1) { const nxt = new Image(); nxt.src = layer1Data[layer1Index+1].img; }
             } else {
                 let nextA = layer2Data[0].audio;
+                // Pre-load track 1 and cover 1
                 document.getElementById('layer2-img').src = layer2Data[0].img;
                 document.getElementById('layer2-text').innerHTML = layer2Data[0].text;
+                document.getElementById(nextA).load(); // Pre-load track 1
+                
                 switchScene('scene-layer1', 'scene-layer2');
                 crossfadeAudio('bgm-lovestory', nextA);
                 currentAudio = nextA;
+                
+                // Pre-load next audio and cover
+                const nxtC = new Image(); nxtC.src = layer2Data[1].img;
+                document.getElementById(layer2Data[1].audio).load();
             }
         }
         function prevLayer1() {
@@ -266,6 +271,12 @@
                 let oldA = currentAudio; currentAudio = layer2Data[layer2Index].audio;
                 updateSceneContent('layer2', layer2Data, layer2Index);
                 crossfadeAudio(oldA, currentAudio);
+                
+                // Pre-load the *following* cover and audio
+                if (layer2Index < layer2Data.length - 1) {
+                    const nxtC = new Image(); nxtC.src = layer2Data[layer2Index+1].img;
+                    document.getElementById(layer2Data[layer2Index+1].audio).load();
+                }
             } else { switchScene('scene-layer2', 'scene-finale'); crossfadeAudio(currentAudio, null); }
         }
         function prevLayer2() {
@@ -279,7 +290,7 @@
 
         function createParticles() {
             const container = document.getElementById('particles');
-            for (let i = 0; i < 40; i++) {
+            for (let i = 0; i < 30; i++) { // Reduced for performance
                 let p = document.createElement('div'); p.classList.add('particle');
                 p.style.left = Math.random() * 100 + 'vw';
                 p.style.width = Math.random() * 3 + 1 + 'px'; p.style.height = p.style.width;
@@ -291,5 +302,4 @@
         createParticles();
     </script>
 </body>
-    </html>
-    
+</html>
