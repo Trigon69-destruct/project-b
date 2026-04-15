@@ -49,16 +49,17 @@
         /* TYPOGRAPHY */
         .main-message { font-family: 'Playfair Display', serif; font-size: 22px; font-style: italic; font-weight: 400; letter-spacing: 1px; line-height: 1.6; color: #f5f5f5; text-shadow: 0 2px 10px rgba(0,0,0,0.8); max-width: 85vw; }
         
-        /* THE CARVED GOLD BIRTHDAY TEXT */
+        /* THE CARVED GOLD BIRTHDAY TEXT (MOBILE OPTIMIZED) */
         .birthday-text { 
             font-family: 'Playfair Display', serif; 
             font-size: 34px; 
             font-weight: 700; 
             line-height: 1.4; 
-            background: linear-gradient(to bottom, #f9d976 0%, #e9b646 50%, #b8860b 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.9)) drop-shadow(0px 0px 15px rgba(233, 182, 70, 0.3));
+            color: #d4af37; /* True Metallic Gold */
+            text-shadow: 
+                -1px -1px 0px rgba(255,255,255,0.2), 
+                2px 2px 4px rgba(0,0,0,0.9), 
+                0px 0px 20px rgba(212, 175, 55, 0.4); 
         }
 
         .caption { font-size: 14px; color: #d0d0d0; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 300; line-height: 1.8; white-space: pre-line; max-width: 80vw; }
@@ -154,12 +155,6 @@
 
         let novelIndex = 0; let layer1Index = 0; let layer2Index = 0; let currentAudio = 'bgm-lovestory';
 
-        // THE PRELOADER: Downloads images instantly in the background
-        window.onload = () => {
-            const allImages = [...novelData, ...layer1Data, ...layer2Data].map(item => item.img);
-            allImages.forEach(src => { const img = new Image(); img.src = src; });
-        };
-
         function switchScene(old, next) {
             document.getElementById(old).classList.remove('active');
             setTimeout(() => { document.getElementById(next).classList.add('active'); }, 1500);
@@ -168,13 +163,20 @@
         function crossfadeAudio(oldId, newId) {
             let oldTrack = document.getElementById(oldId);
             let newTrack = document.getElementById(newId);
+            
             if(newTrack) {
-                newTrack.volume = 0; newTrack.play();
-                let fadeIn = setInterval(() => {
-                    if (newTrack.volume < 0.9) { newTrack.volume = Math.min(1, newTrack.volume + 0.1); } 
-                    else { clearInterval(fadeIn); newTrack.volume = 1; }
-                }, 100);
+                newTrack.volume = 0; 
+                let playPromise = newTrack.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        let fadeIn = setInterval(() => {
+                            if (newTrack.volume < 0.9) { newTrack.volume = Math.min(1, newTrack.volume + 0.1); } 
+                            else { clearInterval(fadeIn); newTrack.volume = 1; }
+                        }, 100);
+                    }).catch(error => console.log("Playback blocked"));
+                }
             } 
+            
             if (oldTrack) {
                 let fadeOut = setInterval(() => { 
                     if (oldTrack.volume > 0.1) { oldTrack.volume = Math.max(0, oldTrack.volume - 0.1); } 
@@ -184,10 +186,23 @@
         }
 
         function startExperience() {
+            // MOBILE AUDIO UNLOCK HACK: Briefly play and pause all audio to bypass restrictions
+            let allAudios = ['bgm-birthday', 'bgm-lovestory', 'track1', 'track2', 'track3', 'track4', 'track5'];
+            allAudios.forEach(id => {
+                let el = document.getElementById(id);
+                if(el) {
+                    el.volume = 0;
+                    let p = el.play();
+                    if(p !== undefined) { p.then(() => { if(id !== 'bgm-birthday') el.pause(); }).catch(e=>{}); }
+                }
+            });
+
             switchScene('scene-start', 'scene-birthday');
-            document.getElementById('bgm-birthday').volume = 1;
-            document.getElementById('bgm-birthday').play();
+            let mainAudio = document.getElementById('bgm-birthday');
+            mainAudio.volume = 1;
+            mainAudio.play();
             
+            // 30 SECOND TIMER
             setTimeout(() => {
                 document.getElementById('novel-img').src = novelData[0].img;
                 document.getElementById('novel-text').innerHTML = novelData[0].text;
@@ -202,6 +217,11 @@
             let img = document.getElementById(prefix + '-img'); 
             let txt = document.getElementById(prefix + '-text');
             img.style.opacity = 0; txt.style.opacity = 0;
+            
+            // Pre-load the single next image right before fading it in
+            let tempImg = new Image();
+            tempImg.src = dataArray[index].img;
+            
             setTimeout(() => { 
                 img.src = dataArray[index].img; 
                 txt.innerHTML = dataArray[index].text; 
@@ -259,7 +279,7 @@
 
         function createParticles() {
             const container = document.getElementById('particles');
-            for (let i = 0; i < 50; i++) {
+            for (let i = 0; i < 40; i++) {
                 let p = document.createElement('div'); p.classList.add('particle');
                 p.style.left = Math.random() * 100 + 'vw';
                 p.style.width = Math.random() * 3 + 1 + 'px'; p.style.height = p.style.width;
@@ -271,4 +291,5 @@
         createParticles();
     </script>
 </body>
-</html>
+    </html>
+    
