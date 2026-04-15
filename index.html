@@ -5,40 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Obsidian Gallery</title>
     <style>
-        /* THE MIDNIGHT ATMOSPHERE */
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: linear-gradient(-45deg, #050505, #120422, #0b0e1a, #161616); background-size: 400% 400%; animation: gradientBG 15s ease infinite; font-family: 'Inter', -apple-system, sans-serif; color: #e0e0e0; display: flex; justify-content: center; align-items: center; text-align: center; }
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: linear-gradient(-45deg, #050505, #120422, #0b0e1a, #161616); background-size: 400% 400%; animation: gradientBG 15s ease infinite; font-family: 'Inter', sans-serif; color: #e0e0e0; display: flex; justify-content: center; align-items: center; text-align: center; }
         @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        
-        /* STAR DRIFT PARTICLES */
         #particles { position: absolute; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
         .particle { position: absolute; background: rgba(255, 255, 255, 0.4); border-radius: 50%; animation: float 12s infinite linear; }
         @keyframes float { 0% { transform: translateY(110vh) scale(0); opacity: 0; } 50% { opacity: 0.6; } 100% { transform: translateY(-10vh) scale(1); opacity: 0; } }
-
-        /* CINEMATIC SCENES */
         .scene { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 2s ease-in-out; z-index: 10; padding: 20px; box-sizing: border-box; }
         .active { opacity: 1; pointer-events: auto; }
-
-        /* OBSIDIAN GLASS UI */
-        .glass-box { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 15px; padding: 40px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8); display: flex; flex-direction: column; align-items: center; gap: 25px; }
-        
-        /* TYPOGRAPHY */
-        input { background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 24px; text-align: center; letter-spacing: 8px; outline: none; width: 160px; padding: 10px; font-family: monospace; }
-        button { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.4); padding: 12px 35px; border-radius: 2px; font-size: 14px; cursor: pointer; transition: all 0.5s ease; text-transform: uppercase; letter-spacing: 3px; }
+        .glass-box { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 15px; padding: 40px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8); }
+        button { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.4); padding: 15px 40px; border-radius: 2px; font-size: 14px; cursor: pointer; transition: all 0.5s ease; text-transform: uppercase; letter-spacing: 4px; }
         button:hover { background: #fff; color: #000; }
-        
-        .glow-btn { border: 1px solid #fff; padding: 18px 45px; letter-spacing: 5px; animation: breathe 4s infinite alternate; }
-        @keyframes breathe { 0% { opacity: 0.6; box-shadow: 0 0 10px rgba(255,255,255,0.1); } 100% { opacity: 1; box-shadow: 0 0 25px rgba(255,255,255,0.3); } }
-
-        .story-img { max-width: 85vw; max-height: 45vh; border-radius: 4px; filter: grayscale(20%); margin-bottom: 30px; object-fit: cover; }
-        .square-img { width: 85vw; max-width: 380px; height: 85vw; max-height: 380px; border-radius: 2px; object-fit: cover; filter: brightness(90%); margin-bottom: 25px; }
-        .caption { font-size: 16px; letter-spacing: 1px; color: #aaa; font-weight: 300; }
+        .story-img { max-width: 90vw; max-height: 45vh; border-radius: 4px; margin-bottom: 30px; object-fit: cover; }
+        .square-img { width: 85vw; max-width: 380px; height: 85vw; max-height: 380px; border-radius: 2px; object-fit: cover; margin-bottom: 25px; }
         .main-message { font-size: 20px; font-weight: 300; letter-spacing: 2px; line-height: 1.6; }
-
+        .caption { font-size: 14px; color: #aaa; letter-spacing: 1px; }
         .ghost-right { position: absolute; right: 0; top: 0; width: 50%; height: 100%; z-index: 20; cursor: pointer; }
     </style>
 </head>
 <body>
-
     <div id="particles"></div>
 
     <audio id="bgm-birthday" src="birthday_instrumental.mp3" loop></audio>
@@ -50,11 +34,10 @@
     <audio id="track4" src="mishri.mp3" loop></audio>
     <audio id="track5" src="ehsaas.mp3" loop></audio>
 
-    <div id="scene-lock" class="scene active">
+    <div id="scene-start" class="scene active">
         <div class="glass-box">
-            <p class="caption">ACCESS CODE REQUIRED</p>
-            <input type="password" id="passcode" maxlength="4">
-            <button onclick="checkPasscode()">Unlock</button>
+            <p class="caption">A BIRTHDAY TRIBUTE</p>
+            <button onclick="startExperience()">Begin Experience</button>
         </div>
     </div>
 
@@ -69,7 +52,7 @@
     </div>
 
     <div id="scene-button" class="scene">
-        <button class="glow-btn" onclick="enterVault()">ENTER VAULT</button>
+        <button onclick="enterVault()" style="border: 1px solid #fff; box-shadow: 0 0 20px rgba(255,255,255,0.1);">ENTER VAULT</button>
     </div>
 
     <div id="scene-layer1" class="scene">
@@ -99,10 +82,8 @@
         ];
 
         const layer1Data = [
-            { img: "photo1.png", text: "Timeless." },
-            { img: "photo2.png", text: "Perspective." },
-            { img: "photo3.png", text: "Moments." },
-            { img: "photo4.png", text: "Serenity." },
+            { img: "photo1.png", text: "Timeless." }, { img: "photo2.png", text: "Perspective." },
+            { img: "photo3.png", text: "Moments." }, { img: "photo4.png", text: "Serenity." },
             { img: "photo5.png", text: "Presence." }
         ];
 
@@ -116,9 +97,9 @@
 
         let novelIndex = 0; let layer1Index = 0; let layer2Index = 0; let currentAudio = null;
 
-        function switchScene(oldScene, newScene) {
-            document.getElementById(oldScene).classList.remove('active');
-            setTimeout(() => { document.getElementById(newScene).classList.add('active'); }, 2000);
+        function switchScene(old, next) {
+            document.getElementById(old).classList.remove('active');
+            setTimeout(() => { document.getElementById(next).classList.add('active'); }, 1500);
         }
 
         function crossfadeAudio(oldId, newId) {
@@ -126,30 +107,25 @@
             let newTrack = document.getElementById(newId);
             if(newTrack) {
                 newTrack.volume = 0; newTrack.play();
-                let fadeId = setInterval(() => {
+                let fade = setInterval(() => {
                     if (newTrack.volume < 0.9) newTrack.volume += 0.1;
                     if (oldTrack && oldTrack.volume > 0.1) oldTrack.volume -= 0.1;
-                    else { clearInterval(fadeId); if(oldTrack) oldTrack.pause(); newTrack.volume = 1; }
+                    else { clearInterval(fade); if(oldTrack) oldTrack.pause(); newTrack.volume = 1; }
                 }, 200);
             } else if (oldTrack) {
-                let fadeId = setInterval(() => {
-                    if (oldTrack.volume > 0.1) oldTrack.volume -= 0.1;
-                    else { clearInterval(fadeId); oldTrack.pause(); }
-                }, 400);
+                let fade = setInterval(() => { if (oldTrack.volume > 0.1) oldTrack.volume -= 0.1; else { clearInterval(fade); oldTrack.pause(); } }, 400);
             }
         }
 
-        function checkPasscode() {
-            if (document.getElementById('passcode').value === "1704") {
-                switchScene('scene-lock', 'scene-birthday');
-                document.getElementById('bgm-birthday').play();
-                setTimeout(() => {
-                    document.getElementById('novel-img').src = novelData[0].img;
-                    document.getElementById('novel-text').innerText = novelData[0].text;
-                    switchScene('scene-birthday', 'scene-novel');
-                    crossfadeAudio('bgm-birthday', 'bgm-lovestory');
-                }, 4000);
-            }
+        function startExperience() {
+            switchScene('scene-start', 'scene-birthday');
+            document.getElementById('bgm-birthday').play();
+            setTimeout(() => {
+                document.getElementById('novel-img').src = novelData[0].img;
+                document.getElementById('novel-text').innerText = novelData[0].text;
+                switchScene('scene-birthday', 'scene-novel');
+                crossfadeAudio('bgm-birthday', 'bgm-lovestory');
+            }, 4000);
         }
 
         function nextNovel() {
@@ -157,7 +133,7 @@
             if (novelIndex < novelData.length) {
                 let img = document.getElementById('novel-img'); let txt = document.getElementById('novel-text');
                 img.style.opacity = 0; txt.style.opacity = 0;
-                setTimeout(() => { img.src = novelData[novelIndex].img; txt.innerText = novelData[novelIndex].text; img.style.opacity = 1; txt.style.opacity = 1; }, 1000);
+                setTimeout(() => { img.src = novelData[novelIndex].img; txt.innerText = novelData[novelIndex].text; img.style.opacity = 1; txt.style.opacity = 1; }, 800);
             } else { switchScene('scene-novel', 'scene-button'); crossfadeAudio('bgm-lovestory', null); }
         }
 
@@ -173,7 +149,7 @@
             if (layer1Index < layer1Data.length) {
                 let img = document.getElementById('layer1-img'); let txt = document.getElementById('layer1-text');
                 img.style.opacity = 0; txt.style.opacity = 0;
-                setTimeout(() => { img.src = layer1Data[layer1Index].img; txt.innerText = layer1Data[layer1Index].text; img.style.opacity = 1; txt.style.opacity = 1; }, 1000);
+                setTimeout(() => { img.src = layer1Data[layer1Index].img; txt.innerText = layer1Data[layer1Index].text; img.style.opacity = 1; txt.style.opacity = 1; }, 800);
             } else {
                 currentAudio = layer2Data[0].audio;
                 document.getElementById('layer2-img').src = layer2Data[0].img;
@@ -187,10 +163,10 @@
             layer2Index++;
             if (layer2Index < layer2Data.length) {
                 let img = document.getElementById('layer2-img'); let txt = document.getElementById('layer2-text');
-                let oldAudio = currentAudio; currentAudio = layer2Data[layer2Index].audio;
+                let oldA = currentAudio; currentAudio = layer2Data[layer2Index].audio;
                 img.style.opacity = 0; txt.style.opacity = 0;
-                setTimeout(() => { img.src = layer2Data[layer2Index].img; txt.innerText = layer2Data[layer2Index].text; img.style.opacity = 1; txt.style.opacity = 1; }, 1000);
-                crossfadeAudio(oldAudio, currentAudio);
+                setTimeout(() => { img.src = layer2Data[layer2Index].img; txt.innerText = layer2Data[layer2Index].text; img.style.opacity = 1; txt.style.opacity = 1; }, 800);
+                crossfadeAudio(oldA, currentAudio);
             } else { switchScene('scene-layer2', 'scene-finale'); crossfadeAudio(currentAudio, null); }
         }
 
@@ -200,7 +176,7 @@
                 let p = document.createElement('div'); p.classList.add('particle');
                 p.style.left = Math.random() * 100 + 'vw';
                 p.style.width = Math.random() * 3 + 1 + 'px'; p.style.height = p.style.width;
-                p.style.animationDuration = Math.random() * 10 + 10 + 's';
+                p.style.animationDuration = Math.random() * 8 + 8 + 's';
                 p.style.animationDelay = Math.random() * 5 + 's';
                 container.appendChild(p);
             }
