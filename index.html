@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Obsidian Gallery</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
-        /* ALIVE & AESTHETIC BACKGROUND */
         body, html { 
             margin: 0; padding: 0; height: 100%; overflow: hidden; 
-            /* Dynamic Breathing Mesh Gradient */
             background: radial-gradient(circle at 15% 50%, rgba(30, 8, 50, 0.8), transparent 60%),
                         radial-gradient(circle at 85% 30%, rgba(10, 15, 45, 0.8), transparent 60%),
                         linear-gradient(-45deg, #05020a, #10061e, #050610);
@@ -22,17 +20,14 @@
         }
         @keyframes breathingUniverse { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
         
-        /* TWINKLING PARTICLES */
         #particles { position: absolute; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
         .particle { position: absolute; background: #fff; border-radius: 50%; animation: floatUp 12s infinite linear, twinkle 3s infinite alternate; box-shadow: 0 0 8px rgba(255,255,255,0.8); }
         @keyframes floatUp { 0% { transform: translateY(110vh) scale(0); opacity: 0; } 20% { opacity: 0.8; } 80% { opacity: 0.8; } 100% { transform: translateY(-10vh) scale(1.2); opacity: 0; } }
         @keyframes twinkle { 0% { opacity: 0.3; } 100% { opacity: 1; } }
 
-        /* SCENE MANAGEMENT */
         .scene { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 1.5s ease-in-out; z-index: 10; padding: 20px; box-sizing: border-box; }
         .active { opacity: 1; pointer-events: auto; }
 
-        /* NEON GLASS BUTTONS */
         .glass-box { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 15px; padding: 40px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8); }
         button { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); color: #fff; border: 2px solid #00f2fe; padding: 18px 50px; border-radius: 50px; font-size: 16px; cursor: pointer; transition: all 0.4s ease-in-out; letter-spacing: 1px; box-shadow: 0 0 10px rgba(0, 242, 254, 0.3), inset 0 0 5px rgba(0, 242, 254, 0.1); position: relative; z-index: 30; }
         button:hover { background: rgba(255, 255, 255, 0.08); border-color: #fff; box-shadow: 0 0 25px rgba(0, 242, 254, 0.7), inset 0 0 10px rgba(0, 242, 254, 0.3); transform: translateY(-2px); }
@@ -43,24 +38,42 @@
         #scene-button button:hover { border-color: #fff !important; box-shadow: 0 0 25px rgba(170, 0, 255, 0.7), inset 0 0 10px rgba(170, 0, 255, 0.3); }
         @keyframes breatheGlowPurple { 0% { box-shadow: 0 0 10px rgba(170, 0, 255, 0.3); border-color: #a0f; } 100% { box-shadow: 0 0 20px rgba(170, 0, 255, 0.6); border-color: #fff; } }
 
-        /* IMAGES & TYPOGRAPHY */
-        .story-img { max-width: 90vw; max-height: 40vh; border-radius: 8px; margin-bottom: 30px; object-fit: cover; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
-        .square-img { width: 85vw; max-width: 380px; height: 85vw; max-height: 380px; border-radius: 4px; object-fit: cover; margin-bottom: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
+        /* IMAGE MELT EFFECT */
+        .story-img { max-width: 90vw; max-height: 40vh; border-radius: 8px; margin-bottom: 30px; object-fit: cover; box-shadow: 0 0 50px 15px #000, 0 10px 30px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.03); }
+        .square-img { width: 85vw; max-width: 380px; height: 85vw; max-height: 380px; border-radius: 4px; object-fit: cover; margin-bottom: 25px; box-shadow: 0 0 50px 15px #000, 0 10px 30px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.03); }
         
-        /* The New Stylish Font for the Story */
-        .main-message { font-family: 'Playfair Display', serif; font-size: 22px; font-style: italic; font-weight: 400; letter-spacing: 1px; line-height: 1.6; color: #f5f5f5; text-shadow: 0 2px 10px rgba(0,0,0,0.8); max-width: 85vw; }
-        .birthday-text { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; line-height: 1.4; text-shadow: 0 0 20px rgba(255,255,255,0.3); }
-        .caption { font-size: 14px; color: #bbb; letter-spacing: 1.5px; text-transform: uppercase; }
-        
-        /* The Tap Indicator Sign */
-        .tap-indicator { position: absolute; bottom: 8vh; left: 50%; transform: translateX(-50%); font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 3px; color: rgba(255,255,255,0.4); text-transform: uppercase; animation: pulseText 2s infinite; pointer-events: none; }
-        @keyframes pulseText { 0% { opacity: 0.2; transform: translate(-50%, 0); } 50% { opacity: 0.8; transform: translate(-50%, 3px); } 100% { opacity: 0.2; transform: translate(-50%, 0); } }
+        /* NEON BORDERS FOR PLAYLIST COVERS */
+        #scene-layer2 .square-img { animation: breatheNeonImage 3s infinite alternate; border: 2px solid transparent; }
+        @keyframes breatheNeonImage { 0% { border-color: rgba(0, 242, 254, 0.5); box-shadow: 0 0 20px rgba(0, 242, 254, 0.3), 0 0 50px 15px #000; } 100% { border-color: rgba(170, 0, 255, 0.5); box-shadow: 0 0 30px rgba(170, 0, 255, 0.5), 0 0 50px 15px #000; } }
 
-        .ghost-right { position: absolute; right: 0; top: 0; width: 100%; height: 100%; z-index: 20; cursor: pointer; }
+        /* TYPOGRAPHY */
+        .main-message { font-family: 'Playfair Display', serif; font-size: 22px; font-style: italic; font-weight: 400; letter-spacing: 1px; line-height: 1.6; color: #f5f5f5; text-shadow: 0 2px 10px rgba(0,0,0,0.8); max-width: 85vw; }
+        
+        /* THE CARVED GOLD BIRTHDAY TEXT */
+        .birthday-text { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 34px; 
+            font-weight: 700; 
+            line-height: 1.4; 
+            background: linear-gradient(to bottom, #f9d976 0%, #e9b646 50%, #b8860b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.9)) drop-shadow(0px 0px 15px rgba(233, 182, 70, 0.3));
+        }
+
+        .caption { font-size: 14px; color: #d0d0d0; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 300; line-height: 1.8; white-space: pre-line; max-width: 80vw; }
+        .caption-title { font-weight: 600; color: #fff; }
+
+        /* THE NAVIGATION */
+        .tap-indicator { position: absolute; bottom: 6vh; left: 50%; transform: translateX(-50%); font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,0.4); text-transform: uppercase; animation: pulseText 2s infinite; pointer-events: none; width: 100%; opacity: 0.5;}
+        @keyframes pulseText { 0% { opacity: 0.2; } 50% { opacity: 0.8; } 100% { opacity: 0.2; } }
+
+        .ghost-left { position: absolute; left: 0; top: 0; width: 50%; height: 100%; z-index: 20; cursor: pointer; }
+        .ghost-right { position: absolute; right: 0; top: 0; width: 50%; height: 100%; z-index: 20; cursor: pointer; }
     </style>
 </head>
 <body>
-    <div id="particles"></div>
+        <div id="particles"></div>
 
     <audio id="bgm-birthday" src="birthday_instrumental.mp3" loop></audio>
     <audio id="bgm-lovestory" src="lovestory_instrumental.mp3" loop></audio>
@@ -72,7 +85,7 @@
 
     <div id="scene-start" class="scene active">
         <div class="glass-box">
-            <p class="caption" style="margin-bottom:20px;">A BIRTHDAY TRIBUTE</p>
+            <p class="caption" style="margin-bottom:20px; font-weight:600; color:#fff;">PROJECT B // THE OBSIDIAN ARCHIVE</p>
             <button onclick="startExperience()" class="neon-glow">Begin Experience</button>
         </div>
     </div>
@@ -84,7 +97,8 @@
     <div id="scene-novel" class="scene">
         <img id="novel-img" class="story-img" src="">
         <p id="novel-text" class="main-message"></p>
-        <div class="tap-indicator">Tap anywhere to continue &rsaquo;</div>
+        <div class="tap-indicator">&lsaquo; TAP LEFT TO GO BACK &nbsp;&nbsp;|&nbsp;&nbsp; TAP RIGHT TO CONTINUE &rsaquo;</div>
+        <div class="ghost-left" onclick="prevNovel()"></div>
         <div class="ghost-right" onclick="nextNovel()"></div>
     </div>
 
@@ -95,14 +109,16 @@
     <div id="scene-layer1" class="scene">
         <img id="layer1-img" class="square-img" src="">
         <p id="layer1-text" class="caption"></p>
-        <div class="tap-indicator">Tap anywhere to continue &rsaquo;</div>
+        <div class="tap-indicator">&lsaquo; TAP LEFT TO GO BACK &nbsp;&nbsp;|&nbsp;&nbsp; TAP RIGHT TO CONTINUE &rsaquo;</div>
+        <div class="ghost-left" onclick="prevLayer1()"></div>
         <div class="ghost-right" onclick="nextLayer1()"></div>
     </div>
 
     <div id="scene-layer2" class="scene">
         <img id="layer2-img" class="square-img" src="">
         <p id="layer2-text" class="caption"></p>
-        <div class="tap-indicator">Tap to play next track &rsaquo;</div>
+        <div class="tap-indicator">&lsaquo; PREVIOUS TRACK &nbsp;&nbsp;|&nbsp;&nbsp; NEXT TRACK &rsaquo;</div>
+        <div class="ghost-left" onclick="prevLayer2()"></div>
         <div class="ghost-right" onclick="nextLayer2()"></div>
     </div>
 
@@ -183,40 +199,134 @@
                 let img = document.getElementById('novel-img'); let txt = document.getElementById('novel-text');
                 img.style.opacity = 0; txt.style.opacity = 0;
                 setTimeout(() => { img.src = novelData[novelIndex].img; txt.innerText = novelData[novelIndex].text; img.style.opacity = 1; txt.style.opacity = 1; }, 800);
+        const novelData = [
+            { img: "story1.png", text: "Some connections don't need a reason. They just exist, like stars in a quiet sky." },
+            { img: "story2.png", text: "We’ve shared miles of words and hours of silence. Each one a thread in a story only we know." },
+            { img: "story3.png", text: "Time has a way of blurring the lines, turning strangers into a constant presence." },
+            { img: "story4.png", text: "I’ve always appreciated the depth you carry—the parts of you the world doesn't always see." },
+            { img: "story5.png", text: "A birthday isn't just a date; it's a reminder of the energy you bring into the room." },
+            { img: "story6.png", text: "I built this space to capture a fragment of that energy. Step inside whenever you're ready." }
+        ];
+
+        const layer1Data = [
+            { img: "photo1.png", text: "<span class='caption-title'>Timeless.</span>\nThere's a quiet elegance in how you carry yourself." }, 
+            { img: "photo2.png", text: "<span class='caption-title'>Perspective.</span>\nYou've always had a unique way of looking at the world." },
+            { img: "photo3.png", text: "<span class='caption-title'>Moments.</span>\nCapturing the simple things that most people overlook." }, 
+            { img: "photo4.png", text: "<span class='caption-title'>Serenity.</span>\nA reminder that peace looks incredibly good on you." },
+            { img: "photo5.png", text: "<span class='caption-title'>Presence.</span>\nSome people just brighten the room without trying." }
+        ];
+
+        const layer2Data = [
+            { img: "cover1.png", text: "<span class='caption-title'>Track 01 // Arz Kiya Hai</span>\nFor the quiet moments and the unsaid words.", audio: "track1" },
+            { img: "cover2.png", text: "<span class='caption-title'>Track 02 // Jo Tum Mere Ho</span>\nBecause some melodies just feel like home.", audio: "track2" },
+            { img: "cover3.png", text: "<span class='caption-title'>Track 03 // Saibo</span>\nDistance is just a concept when the energy matches.", audio: "track3" },
+            { img: "cover4.png", text: "<span class='caption-title'>Track 04 // Mishri</span>\nSweet, subtle, and beautifully uncomplicated.", audio: "track4" },
+            { img: "cover5.png", text: "<span class='caption-title'>Track 05 // Ehsaas</span>\nA reflection of depth. An absolute classic.", audio: "track5" }
+        ];
+
+        let novelIndex = 0; let layer1Index = 0; let layer2Index = 0; let currentAudio = 'bgm-lovestory';
+
+        // THE PRELOADER: Downloads images instantly in the background
+        window.onload = () => {
+            const allImages = [...novelData, ...layer1Data, ...layer2Data].map(item => item.img);
+            allImages.forEach(src => { const img = new Image(); img.src = src; });
+        };
+
+        function switchScene(old, next) {
+            document.getElementById(old).classList.remove('active');
+            setTimeout(() => { document.getElementById(next).classList.add('active'); }, 1500);
+        }
+
+        function crossfadeAudio(oldId, newId) {
+            let oldTrack = document.getElementById(oldId);
+            let newTrack = document.getElementById(newId);
+            if(newTrack) {
+                newTrack.volume = 0; newTrack.play();
+                let fadeIn = setInterval(() => {
+                    if (newTrack.volume < 0.9) { newTrack.volume = Math.min(1, newTrack.volume + 0.1); } 
+                    else { clearInterval(fadeIn); newTrack.volume = 1; }
+                }, 100);
+            } 
+            if (oldTrack) {
+                let fadeOut = setInterval(() => { 
+                    if (oldTrack.volume > 0.1) { oldTrack.volume = Math.max(0, oldTrack.volume - 0.1); } 
+                    else { clearInterval(fadeOut); oldTrack.pause(); } 
+                }, 100);
+            }
+        }
+
+        function startExperience() {
+            switchScene('scene-start', 'scene-birthday');
+            document.getElementById('bgm-birthday').volume = 1;
+            document.getElementById('bgm-birthday').play();
+            
+            setTimeout(() => {
+                document.getElementById('novel-img').src = novelData[0].img;
+                document.getElementById('novel-text').innerHTML = novelData[0].text;
+                switchScene('scene-birthday', 'scene-novel');
+                crossfadeAudio('bgm-birthday', 'bgm-lovestory');
+            }, 30000);
+        }
+
+        // --- NAVIGATION LOGIC ---
+
+        function updateSceneContent(prefix, dataArray, index) {
+            let img = document.getElementById(prefix + '-img'); 
+            let txt = document.getElementById(prefix + '-text');
+            img.style.opacity = 0; txt.style.opacity = 0;
+            setTimeout(() => { 
+                img.src = dataArray[index].img; 
+                txt.innerHTML = dataArray[index].text; 
+                img.style.opacity = 1; txt.style.opacity = 1; 
+            }, 800);
+        }
+
+        function nextNovel() {
+            if (novelIndex < novelData.length - 1) {
+                novelIndex++; updateSceneContent('novel', novelData, novelIndex);
             } else { switchScene('scene-novel', 'scene-button'); }
+        }
+        function prevNovel() {
+            if (novelIndex > 0) { novelIndex--; updateSceneContent('novel', novelData, novelIndex); }
         }
 
         function enterVault() {
             document.getElementById('layer1-img').src = layer1Data[0].img;
-            document.getElementById('layer1-text').innerText = layer1Data[0].text;
+            document.getElementById('layer1-text').innerHTML = layer1Data[0].text;
             switchScene('scene-button', 'scene-layer1');
         }
 
         function nextLayer1() {
-            layer1Index++;
-            if (layer1Index < layer1Data.length) {
-                let img = document.getElementById('layer1-img'); let txt = document.getElementById('layer1-text');
-                img.style.opacity = 0; txt.style.opacity = 0;
-                setTimeout(() => { img.src = layer1Data[layer1Index].img; txt.innerText = layer1Data[layer1Index].text; img.style.opacity = 1; txt.style.opacity = 1; }, 800);
+            if (layer1Index < layer1Data.length - 1) {
+                layer1Index++; updateSceneContent('layer1', layer1Data, layer1Index);
             } else {
                 let nextA = layer2Data[0].audio;
                 document.getElementById('layer2-img').src = layer2Data[0].img;
-                document.getElementById('layer2-text').innerText = layer2Data[0].text;
+                document.getElementById('layer2-text').innerHTML = layer2Data[0].text;
                 switchScene('scene-layer1', 'scene-layer2');
                 crossfadeAudio('bgm-lovestory', nextA);
                 currentAudio = nextA;
             }
         }
+        function prevLayer1() {
+            if (layer1Index > 0) { layer1Index--; updateSceneContent('layer1', layer1Data, layer1Index); }
+        }
 
         function nextLayer2() {
-            layer2Index++;
-            if (layer2Index < layer2Data.length) {
-                let img = document.getElementById('layer2-img'); let txt = document.getElementById('layer2-text');
+            if (layer2Index < layer2Data.length - 1) {
+                layer2Index++;
                 let oldA = currentAudio; currentAudio = layer2Data[layer2Index].audio;
-                img.style.opacity = 0; txt.style.opacity = 0;
-                setTimeout(() => { img.src = layer2Data[layer2Index].img; txt.innerText = layer2Data[layer2Index].text; img.style.opacity = 1; txt.style.opacity = 1; }, 800);
+                updateSceneContent('layer2', layer2Data, layer2Index);
                 crossfadeAudio(oldA, currentAudio);
             } else { switchScene('scene-layer2', 'scene-finale'); crossfadeAudio(currentAudio, null); }
+        }
+        function prevLayer2() {
+            if (layer2Index > 0) {
+                layer2Index--;
+                let oldA = currentAudio; currentAudio = layer2Data[layer2Index].audio;
+                updateSceneContent('layer2', layer2Data, layer2Index);
+                crossfadeAudio(oldA, currentAudio);
+            }
         }
 
         function createParticles() {
