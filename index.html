@@ -27,7 +27,6 @@
 
     <audio id="bgm-birthday" src="birthday_instrumental.mp3" loop></audio>
     <audio id="bgm-lovestory" src="lovestory_instrumental.mp3" loop></audio>
-    <audio id="bgm-perfect" src="layer1_bg.mp3" loop></audio>
     <audio id="track1" src="arz_kiya_hai.mp3" loop></audio>
     <audio id="track2" src="jo_tum_mere_ho.mp3" loop></audio>
     <audio id="track3" src="saibo.mp3" loop></audio>
@@ -52,7 +51,7 @@
     </div>
 
     <div id="scene-button" class="scene">
-        <button onclick="enterVault()" style="border: 1px solid #fff; box-shadow: 0 0 20px rgba(255,255,255,0.1);">ENTER VAULT</button>
+        <button onclick="enterVault()" style="border: 1px solid #fff;">ENTER VAULT</button>
     </div>
 
     <div id="scene-layer1" class="scene">
@@ -95,7 +94,7 @@
             { img: "cover5.png", text: "The Sound of Ehsaas.", audio: "track5" }
         ];
 
-        let novelIndex = 0; let layer1Index = 0; let layer2Index = 0; let currentAudio = null;
+        let novelIndex = 0; let layer1Index = 0; let layer2Index = 0; let currentAudio = 'bgm-lovestory';
 
         function switchScene(old, next) {
             document.getElementById(old).classList.remove('active');
@@ -134,14 +133,14 @@
                 let img = document.getElementById('novel-img'); let txt = document.getElementById('novel-text');
                 img.style.opacity = 0; txt.style.opacity = 0;
                 setTimeout(() => { img.src = novelData[novelIndex].img; txt.innerText = novelData[novelIndex].text; img.style.opacity = 1; txt.style.opacity = 1; }, 800);
-            } else { switchScene('scene-novel', 'scene-button'); crossfadeAudio('bgm-lovestory', null); }
+            } else { switchScene('scene-novel', 'scene-button'); }
         }
 
         function enterVault() {
             document.getElementById('layer1-img').src = layer1Data[0].img;
             document.getElementById('layer1-text').innerText = layer1Data[0].text;
             switchScene('scene-button', 'scene-layer1');
-            crossfadeAudio(null, 'bgm-perfect');
+            // NO AUDIO CHANGE - Loop bgm-lovestory
         }
 
         function nextLayer1() {
@@ -151,11 +150,12 @@
                 img.style.opacity = 0; txt.style.opacity = 0;
                 setTimeout(() => { img.src = layer1Data[layer1Index].img; txt.innerText = layer1Data[layer1Index].text; img.style.opacity = 1; txt.style.opacity = 1; }, 800);
             } else {
-                currentAudio = layer2Data[0].audio;
+                let nextA = layer2Data[0].audio;
                 document.getElementById('layer2-img').src = layer2Data[0].img;
                 document.getElementById('layer2-text').innerText = layer2Data[0].text;
                 switchScene('scene-layer1', 'scene-layer2');
-                crossfadeAudio('bgm-perfect', currentAudio);
+                crossfadeAudio('bgm-lovestory', nextA);
+                currentAudio = nextA;
             }
         }
 
