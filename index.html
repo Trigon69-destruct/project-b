@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Obsidian Gallery</title>
     
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
         body, html { 
@@ -73,7 +73,7 @@
     </style>
 </head>
 <body>
-        <div id="particles"></div>
+    <div id="particles"></div>
 
     <audio id="bgm-birthday" src="birthday_instrumental.mp3" loop></audio>
     <audio id="bgm-lovestory" src="lovestory_instrumental.mp3" loop></audio>
@@ -127,78 +127,6 @@
     </div>
 
     <script>
-        const novelData = [
-            { img: "story1.png", text: "Some connections don't need a reason. They just exist, like stars in a quiet sky." },
-            { img: "story2.png", text: "We’ve shared miles of words and hours of silence. Each one a thread in a story only we know." },
-            { img: "story3.png", text: "Time has a way of blurring the lines, turning strangers into a constant presence." },
-            { img: "story4.png", text: "I’ve always appreciated the depth you carry—the parts of you the world doesn't always see." },
-            { img: "story5.png", text: "A birthday isn't just a date; it's a reminder of the energy you bring into the room." },
-            { img: "story6.png", text: "I built this space to capture a fragment of that energy. Step inside whenever you're ready." }
-        ];
-
-        const layer1Data = [
-            { img: "photo1.png", text: "Timeless." }, { img: "photo2.png", text: "Perspective." },
-            { img: "photo3.png", text: "Moments." }, { img: "photo4.png", text: "Serenity." },
-            { img: "photo5.png", text: "Presence." }
-        ];
-
-        const layer2Data = [
-            { img: "cover1.png", text: "The Sound of Arz Kiya Hai.", audio: "track1" },
-            { img: "cover2.png", text: "The Sound of Jo Tum Mere Ho.", audio: "track2" },
-            { img: "cover3.png", text: "The Sound of Saibo.", audio: "track3" },
-            { img: "cover4.png", text: "The Sound of Mishri.", audio: "track4" },
-            { img: "cover5.png", text: "The Sound of Ehsaas.", audio: "track5" }
-        ];
-
-        let novelIndex = 0; let layer1Index = 0; let layer2Index = 0; let currentAudio = 'bgm-lovestory';
-
-        function switchScene(old, next) {
-            document.getElementById(old).classList.remove('active');
-            setTimeout(() => { document.getElementById(next).classList.add('active'); }, 1500);
-        }
-
-        // 1-Second Smooth Fade Engine (10 steps of 100ms)
-        function crossfadeAudio(oldId, newId) {
-            let oldTrack = document.getElementById(oldId);
-            let newTrack = document.getElementById(newId);
-            
-            if(newTrack) {
-                newTrack.volume = 0; 
-                newTrack.play();
-                let fadeIn = setInterval(() => {
-                    if (newTrack.volume < 0.9) { newTrack.volume = Math.min(1, newTrack.volume + 0.1); } 
-                    else { clearInterval(fadeIn); newTrack.volume = 1; }
-                }, 100);
-            } 
-            
-            if (oldTrack) {
-                let fadeOut = setInterval(() => { 
-                    if (oldTrack.volume > 0.1) { oldTrack.volume = Math.max(0, oldTrack.volume - 0.1); } 
-                    else { clearInterval(fadeOut); oldTrack.pause(); } 
-                }, 100);
-            }
-        }
-
-        function startExperience() {
-            switchScene('scene-start', 'scene-birthday');
-            document.getElementById('bgm-birthday').volume = 1;
-            document.getElementById('bgm-birthday').play();
-            
-            // EXACTLY 30 SECONDS (30000ms) BEFORE TRANSITIONING
-            setTimeout(() => {
-                document.getElementById('novel-img').src = novelData[0].img;
-                document.getElementById('novel-text').innerText = novelData[0].text;
-                switchScene('scene-birthday', 'scene-novel');
-                crossfadeAudio('bgm-birthday', 'bgm-lovestory');
-            }, 30000);
-        }
-
-        function nextNovel() {
-            novelIndex++;
-            if (novelIndex < novelData.length) {
-                let img = document.getElementById('novel-img'); let txt = document.getElementById('novel-text');
-                img.style.opacity = 0; txt.style.opacity = 0;
-                setTimeout(() => { img.src = novelData[novelIndex].img; txt.innerText = novelData[novelIndex].text; img.style.opacity = 1; txt.style.opacity = 1; }, 800);
         const novelData = [
             { img: "story1.png", text: "Some connections don't need a reason. They just exist, like stars in a quiet sky." },
             { img: "story2.png", text: "We’ve shared miles of words and hours of silence. Each one a thread in a story only we know." },
