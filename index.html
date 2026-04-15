@@ -4,75 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Obsidian Gallery</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: linear-gradient(-45deg, #050505, #120422, #0b0e1a, #161616); background-size: 400% 400%; animation: gradientBG 15s ease infinite; font-family: 'Inter', sans-serif; color: #e0e0e0; display: flex; justify-content: center; align-items: center; text-align: center; }
-        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        /* ALIVE & AESTHETIC BACKGROUND */
+        body, html { 
+            margin: 0; padding: 0; height: 100%; overflow: hidden; 
+            /* Dynamic Breathing Mesh Gradient */
+            background: radial-gradient(circle at 15% 50%, rgba(30, 8, 50, 0.8), transparent 60%),
+                        radial-gradient(circle at 85% 30%, rgba(10, 15, 45, 0.8), transparent 60%),
+                        linear-gradient(-45deg, #05020a, #10061e, #050610);
+            background-size: 200% 200%; 
+            animation: breathingUniverse 15s ease-in-out infinite alternate; 
+            font-family: 'Inter', sans-serif; color: #e0e0e0; 
+            display: flex; justify-content: center; align-items: center; text-align: center; 
+        }
+        @keyframes breathingUniverse { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
+        
+        /* TWINKLING PARTICLES */
         #particles { position: absolute; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
-        .particle { position: absolute; background: rgba(255, 255, 255, 0.4); border-radius: 50%; animation: float 12s infinite linear; }
-        @keyframes float { 0% { transform: translateY(110vh) scale(0); opacity: 0; } 50% { opacity: 0.6; } 100% { transform: translateY(-10vh) scale(1); opacity: 0; } }
-        .scene { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 2s ease-in-out; z-index: 10; padding: 20px; box-sizing: border-box; }
+        .particle { position: absolute; background: #fff; border-radius: 50%; animation: floatUp 12s infinite linear, twinkle 3s infinite alternate; box-shadow: 0 0 8px rgba(255,255,255,0.8); }
+        @keyframes floatUp { 0% { transform: translateY(110vh) scale(0); opacity: 0; } 20% { opacity: 0.8; } 80% { opacity: 0.8; } 100% { transform: translateY(-10vh) scale(1.2); opacity: 0; } }
+        @keyframes twinkle { 0% { opacity: 0.3; } 100% { opacity: 1; } }
+
+        /* SCENE MANAGEMENT */
+        .scene { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 1.5s ease-in-out; z-index: 10; padding: 20px; box-sizing: border-box; }
         .active { opacity: 1; pointer-events: auto; }
+
+        /* NEON GLASS BUTTONS */
         .glass-box { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 15px; padding: 40px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8); }
+        button { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); color: #fff; border: 2px solid #00f2fe; padding: 18px 50px; border-radius: 50px; font-size: 16px; cursor: pointer; transition: all 0.4s ease-in-out; letter-spacing: 1px; box-shadow: 0 0 10px rgba(0, 242, 254, 0.3), inset 0 0 5px rgba(0, 242, 254, 0.1); position: relative; z-index: 30; }
+        button:hover { background: rgba(255, 255, 255, 0.08); border-color: #fff; box-shadow: 0 0 25px rgba(0, 242, 254, 0.7), inset 0 0 10px rgba(0, 242, 254, 0.3); transform: translateY(-2px); }
+        .neon-glow { animation: breatheGlowCyan 3s infinite alternate; }
+        @keyframes breatheGlowCyan { 0% { box-shadow: 0 0 10px rgba(0, 242, 254, 0.3); border-color: #00f2fe; } 100% { box-shadow: 0 0 20px rgba(0, 242, 254, 0.6); border-color: #fff; } }
+
+        #scene-button button { border: 2px solid #a0f !important; box-shadow: 0 0 10px rgba(170, 0, 255, 0.3), inset 0 0 5px rgba(170, 0, 255, 0.1); animation: breatheGlowPurple 3s infinite alternate; }
+        #scene-button button:hover { border-color: #fff !important; box-shadow: 0 0 25px rgba(170, 0, 255, 0.7), inset 0 0 10px rgba(170, 0, 255, 0.3); }
+        @keyframes breatheGlowPurple { 0% { box-shadow: 0 0 10px rgba(170, 0, 255, 0.3); border-color: #a0f; } 100% { box-shadow: 0 0 20px rgba(170, 0, 255, 0.6); border-color: #fff; } }
+
+        /* IMAGES & TYPOGRAPHY */
+        .story-img { max-width: 90vw; max-height: 40vh; border-radius: 8px; margin-bottom: 30px; object-fit: cover; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
+        .square-img { width: 85vw; max-width: 380px; height: 85vw; max-height: 380px; border-radius: 4px; object-fit: cover; margin-bottom: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
         
-        /* 💎 NEON GLASS BUTTONS 💎 */
-        button { 
-            background: rgba(255, 255, 255, 0.03); /* Faint glass background inside */
-            backdrop-filter: blur(10px); /* Glassmorphism blur */
-            -webkit-backdrop-filter: blur(10px);
-            color: #fff; /* Clean white text */
-            border: 2px solid #00f2fe; /* Glowing cyan border (for start button) */
-            padding: 18px 50px; /* Pillow-soft padding */
-            border-radius: 50px; /* The definitive "pill" shape from your image */
-            font-size: 16px; /* Modern, clear size */
-            font-weight: 400; /* Clean, modern weight */
-            cursor: pointer;
-            transition: all 0.4s ease-in-out; /* Super smooth transition */
-            text-transform: none; /* Switch from Uppercase to Title Case */
-            letter-spacing: 1px; /* Modern spacing */
-            box-shadow: 0 0 10px rgba(0, 242, 254, 0.3), inset 0 0 5px rgba(0, 242, 254, 0.1); /* Subtle inner/outer cyan glow */
-            position: relative;
-        }
-
-        /* Hover: Make the glow intense */
-        button:hover { 
-            background: rgba(255, 255, 255, 0.08); /* Fills subtly on hover */
-            border: 2px solid #fff; /* White-hot border on hover */
-            box-shadow: 0 0 25px rgba(0, 242, 254, 0.7), inset 0 0 10px rgba(0, 242, 254, 0.3); /* Intense cyan aura */
-            transform: translateY(-2px); /* Subtle lift */
-        }
-
-        /* BREATHING GLOW ANIMATIONS (Added as a global class for flexibility) */
-        .neon-glow {
-            animation: breatheGlowCyan 3s infinite alternate;
-        }
-
-        @keyframes breatheGlowCyan {
-            0% { box-shadow: 0 0 10px rgba(0, 242, 254, 0.3); border-color: #00f2fe; }
-            100% { box-shadow: 0 0 20px rgba(0, 242, 254, 0.6); border-color: #fff; }
-        }
-
-        /* Target the Specific "Enter Vault" button for a Deep Purple Glow */
-        #scene-button button {
-            border: 2px solid #a0f !important; /* Deep Purple Neon Border */
-            box-shadow: 0 0 10px rgba(170, 0, 255, 0.3), inset 0 0 5px rgba(170, 0, 255, 0.1); /* Subtle Purple Glow */
-            animation: breatheGlowPurple 3s infinite alternate;
-        }
+        /* The New Stylish Font for the Story */
+        .main-message { font-family: 'Playfair Display', serif; font-size: 22px; font-style: italic; font-weight: 400; letter-spacing: 1px; line-height: 1.6; color: #f5f5f5; text-shadow: 0 2px 10px rgba(0,0,0,0.8); max-width: 85vw; }
+        .birthday-text { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 600; line-height: 1.4; text-shadow: 0 0 20px rgba(255,255,255,0.3); }
+        .caption { font-size: 14px; color: #bbb; letter-spacing: 1.5px; text-transform: uppercase; }
         
-        #scene-button button:hover {
-            border: 2px solid #fff !important; /* White-hot border on hover */
-            box-shadow: 0 0 25px rgba(170, 0, 255, 0.7), inset 0 0 10px rgba(170, 0, 255, 0.3); /* Intense Purple Aura */
-        }
+        /* The Tap Indicator Sign */
+        .tap-indicator { position: absolute; bottom: 8vh; left: 50%; transform: translateX(-50%); font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 3px; color: rgba(255,255,255,0.4); text-transform: uppercase; animation: pulseText 2s infinite; pointer-events: none; }
+        @keyframes pulseText { 0% { opacity: 0.2; transform: translate(-50%, 0); } 50% { opacity: 0.8; transform: translate(-50%, 3px); } 100% { opacity: 0.2; transform: translate(-50%, 0); } }
 
-        @keyframes breatheGlowPurple {
-            0% { box-shadow: 0 0 10px rgba(170, 0, 255, 0.3); border-color: #a0f; }
-            100% { box-shadow: 0 0 20px rgba(170, 0, 255, 0.6); border-color: #fff; }
-        }
-
-        .story-img { max-width: 90vw; max-height: 45vh; border-radius: 4px; margin-bottom: 30px; object-fit: cover; }
-        .square-img { width: 85vw; max-width: 380px; height: 85vw; max-height: 380px; border-radius: 2px; object-fit: cover; margin-bottom: 25px; }
-        .main-message { font-size: 20px; font-weight: 300; letter-spacing: 2px; line-height: 1.6; }
-        .caption { font-size: 14px; color: #aaa; letter-spacing: 1px; }
-        .ghost-right { position: absolute; right: 0; top: 0; width: 50%; height: 100%; z-index: 20; cursor: pointer; }
+        .ghost-right { position: absolute; right: 0; top: 0; width: 100%; height: 100%; z-index: 20; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -88,18 +72,19 @@
 
     <div id="scene-start" class="scene active">
         <div class="glass-box">
-            <p class="caption">A BIRTHDAY TRIBUTE</p>
+            <p class="caption" style="margin-bottom:20px;">A BIRTHDAY TRIBUTE</p>
             <button onclick="startExperience()" class="neon-glow">Begin Experience</button>
         </div>
     </div>
 
     <div id="scene-birthday" class="scene">
-        <h1 class="main-message" style="font-size: 28px;">Happy Birthday.</h1>
+        <h1 class="birthday-text">Happy Birthday<br>to the most Beautiful soul.</h1>
     </div>
 
     <div id="scene-novel" class="scene">
         <img id="novel-img" class="story-img" src="">
         <p id="novel-text" class="main-message"></p>
+        <div class="tap-indicator">Tap anywhere to continue &rsaquo;</div>
         <div class="ghost-right" onclick="nextNovel()"></div>
     </div>
 
@@ -110,17 +95,19 @@
     <div id="scene-layer1" class="scene">
         <img id="layer1-img" class="square-img" src="">
         <p id="layer1-text" class="caption"></p>
+        <div class="tap-indicator">Tap anywhere to continue &rsaquo;</div>
         <div class="ghost-right" onclick="nextLayer1()"></div>
     </div>
 
     <div id="scene-layer2" class="scene">
         <img id="layer2-img" class="square-img" src="">
         <p id="layer2-text" class="caption"></p>
+        <div class="tap-indicator">Tap to play next track &rsaquo;</div>
         <div class="ghost-right" onclick="nextLayer2()"></div>
     </div>
 
     <div id="scene-finale" class="scene" style="background: #000;">
-        <p class="main-message">To another year of growth.<br><br>Take care.</p>
+        <p class="main-message" style="font-style: normal; font-size: 24px;">To another year of growth.<br><br>Take care.</p>
     </div>
 
     <script>
@@ -154,30 +141,40 @@
             setTimeout(() => { document.getElementById(next).classList.add('active'); }, 1500);
         }
 
+        // 1-Second Smooth Fade Engine (10 steps of 100ms)
         function crossfadeAudio(oldId, newId) {
             let oldTrack = document.getElementById(oldId);
             let newTrack = document.getElementById(newId);
+            
             if(newTrack) {
-                newTrack.volume = 0; newTrack.play();
-                let fade = setInterval(() => {
-                    if (newTrack.volume < 0.9) newTrack.volume += 0.1;
-                    if (oldTrack && oldTrack.volume > 0.1) oldTrack.volume -= 0.1;
-                    else { clearInterval(fade); if(oldTrack) oldTrack.pause(); newTrack.volume = 1; }
-                }, 200);
-            } else if (oldTrack) {
-                let fade = setInterval(() => { if (oldTrack.volume > 0.1) oldTrack.volume -= 0.1; else { clearInterval(fade); oldTrack.pause(); } }, 400);
+                newTrack.volume = 0; 
+                newTrack.play();
+                let fadeIn = setInterval(() => {
+                    if (newTrack.volume < 0.9) { newTrack.volume = Math.min(1, newTrack.volume + 0.1); } 
+                    else { clearInterval(fadeIn); newTrack.volume = 1; }
+                }, 100);
+            } 
+            
+            if (oldTrack) {
+                let fadeOut = setInterval(() => { 
+                    if (oldTrack.volume > 0.1) { oldTrack.volume = Math.max(0, oldTrack.volume - 0.1); } 
+                    else { clearInterval(fadeOut); oldTrack.pause(); } 
+                }, 100);
             }
         }
 
         function startExperience() {
             switchScene('scene-start', 'scene-birthday');
+            document.getElementById('bgm-birthday').volume = 1;
             document.getElementById('bgm-birthday').play();
+            
+            // EXACTLY 30 SECONDS (30000ms) BEFORE TRANSITIONING
             setTimeout(() => {
                 document.getElementById('novel-img').src = novelData[0].img;
                 document.getElementById('novel-text').innerText = novelData[0].text;
                 switchScene('scene-birthday', 'scene-novel');
                 crossfadeAudio('bgm-birthday', 'bgm-lovestory');
-            }, 4000);
+            }, 30000);
         }
 
         function nextNovel() {
@@ -224,11 +221,11 @@
 
         function createParticles() {
             const container = document.getElementById('particles');
-            for (let i = 0; i < 40; i++) {
+            for (let i = 0; i < 50; i++) {
                 let p = document.createElement('div'); p.classList.add('particle');
                 p.style.left = Math.random() * 100 + 'vw';
                 p.style.width = Math.random() * 3 + 1 + 'px'; p.style.height = p.style.width;
-                p.style.animationDuration = Math.random() * 8 + 8 + 's';
+                p.style.animationDuration = Math.random() * 10 + 10 + 's';
                 p.style.animationDelay = Math.random() * 5 + 's';
                 container.appendChild(p);
             }
@@ -236,5 +233,4 @@
         createParticles();
     </script>
 </body>
-        </html>
-    
+</html>
