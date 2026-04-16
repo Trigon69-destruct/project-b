@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
-        /* 1. Alive & Aesthetic Background (Retained - It works best) */
+        /* 1. Alive & Aesthetic Background */
         body, html { 
             margin: 0; padding: 0; height: 100%; overflow: hidden; 
             background: radial-gradient(circle at 15% 50%, rgba(30, 8, 50, 0.8), transparent 60%),
@@ -30,7 +30,7 @@
         .scene { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 1.5s ease-in-out; z-index: 10; padding: 20px; box-sizing: border-box; }
         .active { opacity: 1; pointer-events: auto; }
 
-        /* 3. Neon Glass Buttons (Retained - they feel premium) */
+        /* 3. Neon Glass Buttons */
         .glass-box { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 15px; padding: 40px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8); }
         button { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); color: #fff; border: 2px solid #00f2fe; padding: 18px 50px; border-radius: 50px; font-size: 16px; cursor: pointer; transition: all 0.4s ease-in-out; letter-spacing: 1px; box-shadow: 0 0 10px rgba(0, 242, 254, 0.3), inset 0 0 5px rgba(0, 242, 254, 0.1); position: relative; z-index: 30; }
         button:hover { background: rgba(255, 255, 255, 0.08); border-color: #fff; box-shadow: 0 0 25px rgba(0, 242, 254, 0.7), inset 0 0 10px rgba(0, 242, 254, 0.3); transform: translateY(-2px); }
@@ -42,31 +42,25 @@
         @keyframes breatheGlowPurple { 0% { box-shadow: 0 0 10px rgba(170, 0, 255, 0.3); border-color: #a0f; } 100% { box-shadow: 0 0 20px rgba(170, 0, 255, 0.6); border-color: #fff; } }
 
         /* 4. AESTHETIC STATIC IMAGE NEON GLOW */
-        /* Replaces melting shadows with brilliant, solid neon borders that won't fail */
         .story-img { max-width: 90vw; max-height: 40vh; border-radius: 8px; margin-bottom: 25px; object-fit: cover; border: 2px solid rgba(255, 255, 255, 0.15); box-shadow: 0 0 15px rgba(0, 242, 254, 0.2), 0 10px 40px rgba(0,0,0,0.8); }
         .square-img { width: 85vw; max-width: 380px; height: 85vw; max-height: 380px; border-radius: 4px; object-fit: cover; margin-bottom: 25px; border: 2px solid rgba(255, 255, 255, 0.15); box-shadow: 0 0 15px rgba(170, 0, 255, 0.2), 0 10px 40px rgba(0,0,0,0.8); }
         
-        /* Playlist specific static glow */
         #scene-layer2 .square-img { border-color: rgba(255, 255, 255, 0.2); box-shadow: 0 0 30px 10px rgba(0, 242, 254, 0.15), 0 0 60px 10px rgba(170, 0, 255, 0.15), 0 10px 40px rgba(0,0,0,0.8); }
 
-        /* 5. TYPOGRAPHY (KILLING THE ROBOT TEXT) */
-        /* All captions and descriptions are now unified in the elegant, dreamy Playfair style */
+        /* 5. TYPOGRAPHY */
         .main-message { font-family: 'Playfair Display', serif; font-size: 21px; font-style: italic; font-weight: 400; letter-spacing: 0.5px; line-height: 1.6; color: #fdfdfd; text-shadow: 0 2px 10px rgba(0,0,0,0.8); max-width: 85vw; }
         
-        /* Gold Carved Birthday Text - We keep this, it works. */
         .birthday-text { 
             font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 700; line-height: 1.4; 
             color: #d4af37; text-shadow: -1px -1px 0px rgba(255,255,255,0.2), 2px 2px 4px rgba(0,0,0,0.9), 0px 0px 20px rgba(212, 175, 55, 0.4); 
         }
 
-        /* Aesthetics Caption - Dreamy descriptions *under* the image, NO OVERLAP */
         .aes-caption { 
             font-family: 'Playfair Display', serif; font-size: 20px; font-style: italic; color: #fff; line-height: 1.6; 
             margin-top: 10px; max-width: 85vw; text-shadow: 0 2px 8px rgba(0,0,0,0.8); white-space: pre-line; 
         }
         .caption-title { font-style: normal; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: 15px; color: #aaa; margin-bottom: 5px; display: block; font-family: 'Inter', sans-serif;}
 
-        /* Navigation indicator */
         .tap-indicator { position: absolute; bottom: 5vh; left: 50%; transform: translateX(-50%); font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,0.3); text-transform: uppercase; animation: pulseText 2s infinite; pointer-events: none; width: 100%;}
         @keyframes pulseText { 0% { opacity: 0.2; } 50% { opacity: 0.6; } 100% { opacity: 0.2; } }
 
@@ -125,7 +119,11 @@
     </div>
 
     <div id="scene-finale" class="scene" style="background: #000;">
-        <p class="main-message" style="font-style: normal; font-size: 22px;">May this new chapter bring you unwavering peace, brilliant moments, and all the success you deserve.<br><br>Happy Birthday.</p>
+        <p class="main-message" style="font-style: normal; font-size: 22px; color: #eec9d2; text-shadow: 0 0 15px rgba(238, 201, 210, 0.4);">
+            May this new chapter bring you unwavering peace, brilliant moments, and all the success you deserve.
+            <br><br>
+            <span style="color: #d4af37; font-weight: 700; font-size: 28px;">Happy Birthday.</span>
+        </p>
     </div>
 
     <script>
@@ -147,16 +145,15 @@
         ];
 
         const layer2Data = [
-            { img: "cover1.png", text: "<span class='caption-title'>Track 01</span>Arz Kiya Hai.\nA melody for quiet moments and unsaid words.", audio: "track1" },
-            { img: "cover2.png", text: "<span class='caption-title'>Track 02</span>Jo Tum Mere Ho.\nBecause some sounds just feel like home.", audio: "track2" },
-            { img: "cover3.png", text: "<span class='caption-title'>Track 03</span>Tu Aisa Kaise Hai.\nVery intimate, like talking softly late at night.", audio: "track3" },
-            { img: "cover4.png", text: "<span class='caption-title'>Track 04</span>Mishri.\nSweet, subtle, and beautifully uncomplicated.", audio: "track4" },
-            { img: "cover5.png", text: "<span class='caption-title'>Track 05</span>Ehsaas.\nA reflection of depth. An absolute classic.", audio: "track5" }
+            { img: "cover1.png", text: "<span class='caption-title'>Track 01</span>Arz Kiya Hai.\nBecause your presence often speaks louder than any words I could write.", audio: "track1" },
+            { img: "cover2.png", text: "<span class='caption-title'>Track 02</span>Jo Tum Mere Ho.\nA melody that reflects the grace and calm you carry within you.", audio: "track2" },
+            { img: "cover3.png", text: "<span class='caption-title'>Track 03</span>Tu Aisa Kaise Hai.\nIntimate and raw. A reminder of the depth I've always admired in you.", audio: "track3" },
+            { img: "cover4.png", text: "<span class='caption-title'>Track 04</span>Mishri.\nFor the subtle, sweet ways you make everything feel a bit more effortless.", audio: "track4" },
+            { img: "cover5.png", text: "<span class='caption-title'>Track 05</span>Ehsaas.\nA classic reflection for someone who is, quite literally, one of a kind.", audio: "track5" }
         ];
 
         let novelIndex = 0; let layer1Index = 0; let layer2Index = 0; let currentAudio = 'bgm-lovestory';
 
-        // Pre-load audio for the first novel scene and birthday
         document.getElementById('bgm-birthday').load();
         document.getElementById('bgm-lovestory').load();
 
@@ -196,7 +193,6 @@
             mainAudio.volume = 1;
             mainAudio.play();
             
-            // 30 SECOND TIMER
             setTimeout(() => {
                 document.getElementById('novel-img').src = novelData[0].img;
                 document.getElementById('novel-text').innerHTML = novelData[0].text;
@@ -205,28 +201,22 @@
             }, 30000);
         }
 
-        // --- NAVIGATION LOGIC ---
-
         function updateSceneContent(prefix, dataArray, index) {
             let img = document.getElementById(prefix + '-img'); 
             let txt = document.getElementById(prefix + '-text');
             
-            // 1. Fade everything out
             img.style.opacity = 0; 
             txt.style.opacity = 0;
             
-            // 2. Wait for the fade out to finish (800ms) before swapping content
             setTimeout(() => { 
                 txt.innerHTML = dataArray[index].text; 
                 img.src = dataArray[index].img; 
                 
-                // 3. DO NOT fade back in until the mobile browser confirms the new image is fully loaded
                 img.onload = () => {
                     img.style.opacity = 1; 
                     txt.style.opacity = 1; 
                 };
                 
-                // Safety fallback just in case the image loads so fast the browser skips the 'onload' trigger
                 setTimeout(() => {
                     img.style.opacity = 1; 
                     txt.style.opacity = 1; 
@@ -239,7 +229,6 @@
             if (novelIndex < novelData.length - 1) {
                 novelIndex++; 
                 updateSceneContent('novel', novelData, novelIndex);
-                // Pre-load the next image if possible
                 if (novelIndex < novelData.length - 1) { const nxt = new Image(); nxt.src = novelData[novelIndex+1].img; }
             } else { switchScene('scene-novel', 'scene-button'); }
         }
@@ -252,7 +241,6 @@
             document.getElementById('layer1-text').innerHTML = layer1Data[0].text;
             switchScene('scene-button', 'scene-layer1');
             
-            // Pre-load the second photo
             const nxt = new Image(); nxt.src = layer1Data[1].img;
         }
 
@@ -263,16 +251,14 @@
                 if (layer1Index < layer1Data.length - 1) { const nxt = new Image(); nxt.src = layer1Data[layer1Index+1].img; }
             } else {
                 let nextA = layer2Data[0].audio;
-                // Pre-load track 1 and cover 1
                 document.getElementById('layer2-img').src = layer2Data[0].img;
                 document.getElementById('layer2-text').innerHTML = layer2Data[0].text;
-                document.getElementById(nextA).load(); // Pre-load track 1
+                document.getElementById(nextA).load(); 
                 
                 switchScene('scene-layer1', 'scene-layer2');
                 crossfadeAudio('bgm-lovestory', nextA);
                 currentAudio = nextA;
                 
-                // Pre-load next audio and cover
                 const nxtC = new Image(); nxtC.src = layer2Data[1].img;
                 document.getElementById(layer2Data[1].audio).load();
             }
@@ -288,7 +274,6 @@
                 updateSceneContent('layer2', layer2Data, layer2Index);
                 crossfadeAudio(oldA, currentAudio);
                 
-                // Pre-load the *following* cover and audio
                 if (layer2Index < layer2Data.length - 1) {
                     const nxtC = new Image(); nxtC.src = layer2Data[layer2Index+1].img;
                     document.getElementById(layer2Data[layer2Index+1].audio).load();
@@ -306,7 +291,7 @@
 
         function createParticles() {
             const container = document.getElementById('particles');
-            for (let i = 0; i < 30; i++) { // Reduced for performance
+            for (let i = 0; i < 30; i++) { 
                 let p = document.createElement('div'); p.classList.add('particle');
                 p.style.left = Math.random() * 100 + 'vw';
                 p.style.width = Math.random() * 3 + 1 + 'px'; p.style.height = p.style.width;
@@ -318,5 +303,4 @@
         createParticles();
     </script>
 </body>
-    </html>
-    
+</html>
